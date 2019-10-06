@@ -1,8 +1,8 @@
 import requests
 
-class ThemeSelector:
+class EntitySelector:
 
-    def getKeys(self, label):
+    def searchEntities(self, label):
         r = requests.get(f'https://www.wikidata.org/w/api.php?action=wbsearchentities&search={label}&language=en&format=json')
         r = r.json()
         objects = r["search"]

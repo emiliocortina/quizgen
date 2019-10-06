@@ -1,18 +1,32 @@
+# selectedKey = keys[0]
+#
+# if(selectedKey is not None):
+#     # Getting the entity
+#
+
+from flask import Flask, jsonify
+from themeSelector import EntitySelector
 from wikidata.client import Client
-from themeSelector import ThemeSelector
 
-# Making the search
-selector = ThemeSelector()
-keys = selector.getKeys('Madrid')
+app = Flask(__name__)
 
-for key in keys:
-    print(key)
 
-selectedKey = keys[0]
+@app.route('/')
+def index():
+    return 'Server Works!'
 
-if(selectedKey is not None):
-    # Getting the entity
+#adding variables
+@app.route('/search/<label>')
+def searchEntities(label):
+  #returns the username
+  selector = EntitySelector()
+  entities = selector.searchEntities(label)
+  return jsonify(entities)
+
+@app.route('/entity/<entityID>')
+def say_hello(entityID):
     client = Client()  # doctest: +SKIP
-    entity = client.get(selectedKey["id"], load=True)
+    entity = client.get(entityID, load=True)
     print('Selected entity info: ')
     print(entity)
+    return str(entity)
