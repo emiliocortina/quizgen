@@ -8,6 +8,9 @@ from https://stackoverflow.com/questions/27452656/wikidata-entity-value-from-nam
 * Example of search by label: https://www.wikidata.org/w/api.php?action=wbsearchentities&search=Spain&language=en&format=json
 
 
-## Other tools
+## Python tools
 * Python Requests (http requests): https://requests.kennethreitz.org/en/master/
 * Python imports: https://stackoverflow.com/questions/2349991/how-to-import-other-python-files
+* Flask tutorial: https://medium.com/@onejohi/building-a-simple-rest-api-with-python-and-flask-b404371dc699
+ https://www.youtube.com/watch?v=PTZiDnuC86g
+ 
