@@ -1,0 +1,22 @@
+
+    *** CORRECTA ***
+    SELECT
+      ?property
+    WHERE {
+       wd:ENTITY_ID wdt:PROPERTY_ID ?property.
+
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+    }
+
+    *** DISTRACTORES ***
+    SELECT
+      ?city ?property
+    WHERE {
+      ?city wdt:P31 wd:Q515.
+      ?city wdt:PROPERTY_ID ?property.
+
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+    }
+
+
+

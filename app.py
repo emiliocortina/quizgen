@@ -5,7 +5,7 @@
 #
 
 from flask import Flask, jsonify
-from themeSelector import EntitySelector
+from theme_selector import EntitySelector
 from wikidata.client import Client
 
 app = Flask(__name__)
