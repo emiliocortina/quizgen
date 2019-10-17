@@ -18,5 +18,30 @@
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
 
+Generator.generate( {entity, n_questions, language, n_distractors} )
+
+
+
+Given an entity:
+* Determine if it is an instance of an already defined category.
+
+
+PROPERTIES:
+
+*P1549 Demonym: How are the people from ENTITY called?
+*P17 Country: In which country is ENTITY?
+*P206 Body of water: What is the main body of water in ENTITY?
+*P6 Head of government: Who is the head of government of ENTITY?
+
+
+
+**** DETERMINE CATEGORY *****
+SELECT
+  ?category ?categoryLabel
+WHERE {
+  wd:Q2807 (wdt:P31|wdt:P279)+ ?category.
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
 
 

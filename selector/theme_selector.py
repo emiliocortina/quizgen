@@ -2,7 +2,7 @@ import requests
 
 class EntitySelector:
 
-    def searchEntities(self, label):
+    def search_entities(self, label):
         r = requests.get(f'https://www.wikidata.org/w/api.php?action=wbsearchentities&search={label}&language=en&format=json')
         r = r.json()
         objects = r["search"]

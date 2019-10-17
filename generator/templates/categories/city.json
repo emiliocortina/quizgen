@@ -1,0 +1,17 @@
+{
+  "P1549": {
+    "name": "Demonym",
+    "en": "How are the people from %s called?",
+    "es": "¿Cómo se llaman los habitantes de %s?"
+  },
+  "P17": {
+    "name": "Country",
+    "en": "What is the main body of water in %s?",
+    "es": "¿Cuál es el principal cuerpo de agua en %s?"
+  },
+    "P6": {
+    "name": "Head of government",
+    "en": "Who is the head of government of %s?",
+    "es": "¿Quién es el governante principal de %s?"
+  }
+}
