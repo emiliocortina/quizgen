@@ -23,7 +23,7 @@ def generateQuestion(entity_id, property_id, statement, locale):
         statement = statement[locale] % entity_label
         print('Statement: ', statement)
         correct_answer = getCorrectAnswer(entity_id, property_id)
-        print('Correct Answer: ', correct_answer['propertyLabel']['value'])
+        print('Correct Answer: ', correct_answer['answerEntityLabel']['value'])
         distractors = getDistractors(property_id)
         for distractor in distractors:
             print(distractor['distractorLabel']['value'])
@@ -32,6 +32,8 @@ def generateQuestion(entity_id, property_id, statement, locale):
         print('Data not found for given property and entity')
     except ReadTimeout:
         print('Time out')
+    else:
+        print('Some error occurred')
     return None
 
 def getEntityLabel(entity_id, locale):
@@ -48,9 +50,10 @@ def getEntityLabel(entity_id, locale):
 def getCorrectAnswer(entity_id, property_id):
     query = """
     SELECT
-      ?propertyLabel
+      ?answerEntity ?answerType ?answerEntityLabel
     WHERE {
-       wd:%s wdt:%s ?property.
+       wd:%s wdt:%s ?answerEntity.
+       OPTIONAL {?answerEntity wdt:P31 ?answerType.}
 
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
@@ -61,9 +64,10 @@ def getCorrectAnswer(entity_id, property_id):
 
 def getDistractors(property_id):
     query = """
-    SELECT DISTINCT ?distractorLabel
+    SELECT DISTINCT ?distractorEntity ?distractorType ?distractorLabel
     WHERE {
-      ?subject wdt:%s ?distractor.
+      ?subject wdt:%s ?distractorEntity.
+      OPTIONAL {?distractorLabel wdt:P31 ?distractorType.}
 
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
@@ -75,9 +79,11 @@ def getDistractors(property_id):
 
 def makeQuery(query):
     url = 'https://query.wikidata.org/sparql'
-    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=10)
-    while r.status_code == '429':
+    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=20)
+    while r.status_code == 429:
         time.sleep(1.2)
         r = requests.get(url, params={'format': 'json', 'query': query})
+    if r.status_code != 200:
+        print('Error')
     data = r.json()
     return data['results']['bindings']

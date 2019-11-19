@@ -32,5 +32,8 @@ def helloLabel(label):
 @app.route('/entity/<entity_id>/')
 def say_hello(entity_id,):
     category = request.args.get('category')
-    mcq = generateQuestions(entity_id, questions_category=category)
+    if category is not None:
+        mcq = generateQuestions(entity_id, questions_category=category)
+    else:
+        mcq = generateQuestions(entity_id)
     return jsonify(mcq)
