@@ -19,4 +19,5 @@ from https://stackoverflow.com/questions/27452656/wikidata-entity-value-from-nam
 * Python imports: https://stackoverflow.com/questions/2349991/how-to-import-other-python-files
 * Flask tutorial: https://medium.com/@onejohi/building-a-simple-rest-api-with-python-and-flask-b404371dc699
  https://www.youtube.com/watch?v=PTZiDnuC86g
+* Lambda map and filter: https://medium.com/better-programming/lambda-map-and-filter-in-python-4935f248593
  

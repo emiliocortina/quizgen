@@ -9,14 +9,13 @@
     }
 
     *** DISTRACTORES ***
-    SELECT
-      ?city ?property
+    SELECT DISTINCT ?distractor ?distractorLabel
     WHERE {
-      ?city wdt:P31 wd:Q515.
-      ?city wdt:PROPERTY_ID ?property.
+      ?subject wdt:P30 ?distractor.
 
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
+    LIMIT 4
 
 Generator.generate( {entity, n_questions, language, n_distractors} )
 
@@ -45,3 +44,23 @@ WHERE {
 }
 
 
+
+
+
+****** Nueva version ******
+# Obtener los predicados relacionados
+SELECT
+  ?property ?propertyLabel
+WHERE {
+  ?property wdt:P31 wd:Q19829914.
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+
+Categorias:
+https://www.wikidata.org/wiki/Wikidata:List_of_properties/en
+
+Wikidata Property:
+    - Property related to science:
+        -Property related to economics
+        -Property related to linguistics

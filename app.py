@@ -4,10 +4,9 @@
 #     # Getting the entity
 #
 
-from flask import Flask, jsonify
-from tfg.selector.theme_selector import EntitySelector
-from tfg.generator.mcq_generator import generateQuestions
-from wikidata.client import Client
+from flask import Flask, jsonify, request
+from tfg.search.entity_search import search_entities
+from tfg.generator.questions_generator import generateQuestions
 
 app = Flask(__name__)
 
@@ -20,8 +19,7 @@ def index():
 @app.route('/search/<label>/')
 def searchEntities(label):
   #returns the username
-  selector = EntitySelector()
-  entities = selector.search_entities(label)
+  entities = search_entities(label)
   return jsonify(entities)
 
 #adding variables
@@ -31,7 +29,8 @@ def helloLabel(label):
   predefined_string = '%s is the mayor of Madrid'
   return (predefined_string%(label))
 
-@app.route('/entity/<entityID>/')
-def say_hello(entityID):
-    mcq = generateQuestions(entityID)
-    return mcq
+@app.route('/entity/<entity_id>/')
+def say_hello(entity_id,):
+    category = request.args.get('category')
+    mcq = generateQuestions(entity_id, questions_category=category)
+    return jsonify(mcq)
