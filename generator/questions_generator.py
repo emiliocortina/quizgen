@@ -25,7 +25,7 @@ def generateQuestion(entity_id, property_id, statement, locale):
         print('Statement: ', statement)
         correct_answer = getCorrectAnswer(entity_id, property_id)
         print('Correct Answer: ', correct_answer['answerEntityLabel']['value'])
-        distractors = getDistractors(property_id)
+        distractors = getDistractors(entity_id, property_id)
         for distractor in distractors:
             print(distractor['distractorEntityLabel']['value'])
         return {'statement': statement, 'answer': correct_answer, 'distractors': distractors}
@@ -66,16 +66,19 @@ def getCorrectAnswer(entity_id, property_id):
     return results[0]
 
 
-def getDistractors(property_id):
+def getDistractors(entity_id, property_id):
     entitiesQuery = """
     SELECT DISTINCT ?distractorEntity ?distractorEntityLabel
     WHERE {
-      ?subject wdt:%s ?distractorEntity.
+        FILTER NOT EXISTS {
+            ?distractorEntity wdt:%s wd:%s.
+          }
+        ?subject wdt:%s ?distractorEntity.
 
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
     LIMIT 3
-    """ % property_id
+    """ % (property_id, entity_id, property_id)
     typesQuery = """
     SELECT DISTINCT ?distractorEntityType
     WHERE {
