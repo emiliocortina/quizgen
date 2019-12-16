@@ -5,8 +5,8 @@
 #
 
 from flask import Flask, jsonify, request
-from tfg.search.entity_search import search_entities
-from tfg.generator.questions_generator import generateQuestions
+from search.entity_search import search_entities
+from generator.questions_generator import generateQuestions
 
 app = Flask(__name__)
 

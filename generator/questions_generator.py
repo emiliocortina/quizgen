@@ -1,7 +1,7 @@
 import time
 import requests
 from requests.exceptions import ReadTimeout
-from tfg.categories.manager import getEntityCategory, getCategoryQuestions, isValidCategory
+from categories.manager import getEntityCategory, getCategoryQuestions, isValidCategory
 
 
 def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', locale="en"):
