@@ -4,7 +4,8 @@
 #     # Getting the entity
 #
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
+import simplejson as json
 from search.entity_search import search_entities
 from generator.questions_generator import generateQuestions
 
@@ -33,7 +34,6 @@ def helloLabel(label):
 def say_hello(entity_id,):
     category = request.args.get('category')
     if category is not None:
-        mcq = generateQuestions(entity_id, questions_category=category)
+        return Response(generateQuestions(entity_id, questions_category=category), mimetype='application/json')
     else:
-        mcq = generateQuestions(entity_id)
-    return jsonify(mcq)
+        return Response(generateQuestions(entity_id), mimetype='application/json')

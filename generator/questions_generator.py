@@ -1,3 +1,4 @@
+import json
 import time
 import requests
 from requests.exceptions import ReadTimeout
@@ -5,15 +6,25 @@ from categories.manager import getEntityCategory, getCategoryQuestions, isValidC
 
 
 def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', locale="en"):
+    yield '{"questions": ['
+    start_time = time.time()
     if not isValidCategory(questions_category):
-        return ['Please enter a valid category']
-    templates = getCategoryQuestions(questions_category, locale)
-    questions = []
-    for template in templates:
-        question = generateQuestion(entity_id, template, templates[template], locale)
-        if question is not None:
-            questions.append(question)
-    return questions
+        yield 'Please enter a valid category'
+    else:
+        templates = getCategoryQuestions(questions_category, locale)
+        if len(templates) > 0:
+            prev_element = next(templates.__iter__())
+            q = generateQuestion(entity_id, prev_element, templates[prev_element], locale)
+            if q is not None:
+                yield json.dumps(q)
+            for property_id in templates:
+                q = generateQuestion(entity_id, property_id, templates[property_id], locale)
+                if q is not None:
+                    yield ','
+                    yield json.dumps(q)
+        elapsed_time = time.time() - start_time
+        print('********** ELAPSED:  ELAPSED: ', elapsed_time, '**********')
+    yield ']}'
 
 
 def generateQuestion(entity_id, property_id, statement, locale):
@@ -68,17 +79,14 @@ def getCorrectAnswer(entity_id, property_id):
 
 def getDistractors(entity_id, property_id):
     entitiesQuery = """
-    SELECT DISTINCT ?distractorEntity ?distractorEntityLabel
+    SELECT DISTINCT ?subject ?distractorEntity ?distractorEntityLabel
     WHERE {
-        FILTER NOT EXISTS {
-            ?distractorEntity wdt:%s wd:%s.
-          }
-        ?subject wdt:%s ?distractorEntity.
+        ?distractorEntity wdt:%s ?subject.
 
         SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
-    LIMIT 3
-    """ % (property_id, entity_id, property_id)
+    LIMIT 10
+    """ % (property_id)
     typesQuery = """
     SELECT DISTINCT ?distractorEntityType
     WHERE {
@@ -88,18 +96,21 @@ def getDistractors(entity_id, property_id):
     """
     entities = makeQuery(entitiesQuery)
 
+    resultEntities = []
     for entity in entities:
-        entity_id = entity['distractorEntity']['value'].split('/')[-1]
-        query = typesQuery % entity_id
-        types = makeQuery(query)
-        entity['distractorEntityTypes'] = types[0]
-        pass
-    return entities
+        subject = entity['subject']['value'].split('/')[-1]
+        if subject != entity_id and len(resultEntities) < 3:
+            distractor_id = entity['distractorEntity']['value'].split('/')[-1]
+            query = typesQuery % distractor_id
+            types = makeQuery(query)
+            entity['distractorEntityTypes'] = types[0]
+            resultEntities.append(entity)
+    return resultEntities
 
 
 def makeQuery(query):
     url = 'https://query.wikidata.org/sparql'
-    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=60)
+    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=40)
     while r.status_code == 429:
         time.sleep(1.2)
         r = requests.get(url, params={'format': 'json', 'query': query})

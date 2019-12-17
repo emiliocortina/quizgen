@@ -20,4 +20,7 @@ from https://stackoverflow.com/questions/27452656/wikidata-entity-value-from-nam
 * Flask tutorial: https://medium.com/@onejohi/building-a-simple-rest-api-with-python-and-flask-b404371dc699
  https://www.youtube.com/watch?v=PTZiDnuC86g
 * Lambda map and filter: https://medium.com/better-programming/lambda-map-and-filter-in-python-4935f248593
- 
+
+### Other links
+* Heroku timeout: https://librenepal.com/article/flask-and-heroku-timeout/
+* Flask generators: https://blog.al4.co.nz/2016/01/streaming-json-with-flask/
