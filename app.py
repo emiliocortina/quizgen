@@ -5,7 +5,6 @@
 #
 
 from flask import Flask, jsonify, request, Response
-import simplejson as json
 from search.entity_search import search_entities
 from generator.questions_generator import generateQuestions
 
