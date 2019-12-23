@@ -7,9 +7,8 @@ from categories.manager import getEntityCategory, getCategoryQuestions, isValidC
 
 def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', locale="en"):
     yield '{"questions": ['
-    start_time = time.time()
     if not isValidCategory(questions_category):
-        return '\'Please enter a valid category\''
+        yield '\'Please enter a valid category\''
     else:
         templates = getCategoryQuestions(questions_category, locale)
         if len(templates) > 0:
@@ -22,10 +21,7 @@ def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', 
                 if q is not None:
                     yield ','
                     yield json.dumps(q)
-        elapsed_time = time.time() - start_time
-        print('********** ELAPSED:  ELAPSED: ', elapsed_time, '**********')
     yield ']}'
-    return ''
 
 
 def generateQuestion(entity_id, property_id, statement, locale):
@@ -112,7 +108,7 @@ def getDistractors(entity_id, property_id):
 
 def makeQuery(query):
     url = 'https://query.wikidata.org/sparql'
-    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=40)
+    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=26)
     while r.status_code == 429:
         time.sleep(1.2)
         r = requests.get(url, params={'format': 'json', 'query': query})
