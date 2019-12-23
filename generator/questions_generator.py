@@ -108,11 +108,14 @@ def getDistractors(entity_id, property_id):
 
 def makeQuery(query):
     url = 'https://query.wikidata.org/sparql'
+    yield ''
     r = requests.get(url, params={'format': 'json', 'query': query}, timeout=26)
     while r.status_code == 429:
+        yield ''
         time.sleep(1.2)
         r = requests.get(url, params={'format': 'json', 'query': query})
     if r.status_code != 200:
         raise IndexError()
     data = r.json()
+    yield ''
     return data['results']['bindings']
