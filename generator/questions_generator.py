@@ -9,7 +9,7 @@ def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', 
     yield '{"questions": ['
     start_time = time.time()
     if not isValidCategory(questions_category):
-        yield 'Please enter a valid category'
+        return '\'Please enter a valid category\''
     else:
         templates = getCategoryQuestions(questions_category, locale)
         if len(templates) > 0:
@@ -25,6 +25,7 @@ def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', 
         elapsed_time = time.time() - start_time
         print('********** ELAPSED:  ELAPSED: ', elapsed_time, '**********')
     yield ']}'
+    return ''
 
 
 def generateQuestion(entity_id, property_id, statement, locale):
@@ -79,33 +80,34 @@ def getCorrectAnswer(entity_id, property_id):
 
 def getDistractors(entity_id, property_id):
     entitiesQuery = """
-    SELECT DISTINCT ?subject ?distractorEntity ?distractorEntityLabel
+    SELECT DISTINCT ?distractorEntity ?distractorEntityLabel ?distractorEntityDescription
     WHERE {
-        ?distractorEntity wdt:%s ?subject.
-
-        SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+      ?subject wdt:%s ?distractorEntity.
+      FILTER NOT EXISTS {
+        wd:%s wdt:%s ?distractorEntity.
+      }
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
-    LIMIT 10
-    """ % (property_id)
-    typesQuery = """
-    SELECT DISTINCT ?distractorEntityType
+    LIMIT 3
+    """ % (property_id, entity_id, property_id)
+
+    additional_info_query = """
+    SELECT ?distractorEntityType ?distractorEntityImage
     WHERE {
       wd:%s wdt:P31 ?distractorEntityType.
+      wd:%s wdt:P18 ?distractorEntityImage.
     }
     LIMIT 5
     """
     entities = makeQuery(entitiesQuery)
 
-    resultEntities = []
     for entity in entities:
-        subject = entity['subject']['value'].split('/')[-1]
-        if subject != entity_id and len(resultEntities) < 3:
-            distractor_id = entity['distractorEntity']['value'].split('/')[-1]
-            query = typesQuery % distractor_id
-            types = makeQuery(query)
-            entity['distractorEntityTypes'] = types[0]
-            resultEntities.append(entity)
-    return resultEntities
+        distractor_id = entity['distractorEntity']['value'].split('/')[-1]
+        query = additional_info_query % (distractor_id, distractor_id)
+        additional_info = makeQuery(query)
+        entity['distractorAdditionalInfo'] = additional_info
+
+    return entities
 
 
 def makeQuery(query):
