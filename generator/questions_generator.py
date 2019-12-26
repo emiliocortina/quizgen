@@ -25,6 +25,8 @@ def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', 
                         yield ','
                     yield json.dumps(q)
                     initial = True
+                else:
+                    yield ''
     yield ']}'
 
 
