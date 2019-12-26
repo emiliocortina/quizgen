@@ -14,13 +14,17 @@ def generateQuestions(entity_id, n_questions=5, questions_category='Q52511956', 
         if len(templates) > 0:
             prev_element = next(templates.__iter__())
             q = generateQuestion(entity_id, prev_element, templates[prev_element], locale)
+            initial = False
             if q is not None:
                 yield json.dumps(q)
+                initial = True
             for property_id in templates:
                 q = generateQuestion(entity_id, property_id, templates[property_id], locale)
                 if q is not None:
-                    yield ','
+                    if initial:
+                        yield ','
                     yield json.dumps(q)
+                    initial = True
     yield ']}'
 
 
@@ -108,7 +112,7 @@ def getDistractors(entity_id, property_id):
 
 def makeQuery(query):
     url = 'https://query.wikidata.org/sparql'
-    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=26)
+    r = requests.get(url, params={'format': 'json', 'query': query}, timeout=40)
     while r.status_code == 429:
         time.sleep(1.2)
         r = requests.get(url, params={'format': 'json', 'query': query})
