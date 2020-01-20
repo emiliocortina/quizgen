@@ -1,0 +1,14 @@
+[[section-api-endpoints]]
+
+== API Endpoints
+
+=== Search by label
+
+Returns.....
+
+    /search/<entity_id>
+
+
+=== Generate questions
+
+    /entity/<entity_id>?category=<category_id>

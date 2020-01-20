@@ -1,0 +1,18 @@
+[[section-architecture]]
+
+== Architecture
+
+image:architecture.svg[alt=Program Architecture]
+
+=== Edpoint Controllers
+
+=== Search Module
+
+
+=== Questions Generator Module
+
+
+=== Categories Module
+
+
+=== Wikidata Local Service Module

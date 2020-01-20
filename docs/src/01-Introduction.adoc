@@ -1,0 +1,40 @@
+[[section-introduction-and-goals]]
+== Introduction and Goals
+
+
+=== Project Overview
+The project consists on a REST API that shall provide basic functionality to generate multiple choice questions, using
+Wikidata's knowledge graph as the source of information.
+
+
+=== Linked data
+
+Linked Data is structured data which is interlinked with other data. Linked Data can be expressed as semantic triples,
+or simply triple. As its name indicates, a triple is a set of three entities that codifies a statement about semantic
+data in the form of subject–predicate–object expressions (e.g. "Bob is 35", or "Bob knows John").
+
+// IMAGEN SUBJECT PREDICATE OBJECT
+image:triple.svg[alt=Semantic Triple]
+
+These links result in knowledge graphs of entities and
+the relationships between them.
+
+// IMAGEN SEVERAL ENTITIES
+image:graph.svg[alt=Graph with several entities]
+
+Part of the vision of linked data is for the Internet to become a global database. This is specially useful for our
+purpose, as it allows us to retrieve data dynamically from any domain.
+
+
+=== Wikidata
+
+Wikidata is a knowledge base similar to Wikipedia, but it structures its content as linked data.
+
+It uses a few more elements than the ones explained above, below you can find an example with the
+most important terms used in Wikidata.
+
+// IMAGEN
+image:Datamodel_in_Wikidata.svg[]
+
+Wikidata exposes a public https://www.wikidata.org/wiki/Wikidata:Data_access[API] that we use to query
+against its data set using the semantic query language https://en.wikipedia.org/wiki/SPARQL[SPARQL].

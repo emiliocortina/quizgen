@@ -1,0 +1,100 @@
+[[section-questions-generation]]
+
+== Questions generation
+
+Our goal is to compose questions about an entity.
+We can form questions about an entitiy by asking for the value of its properties.
+
+For instance, in the
+previous example, if we were given 'Douglas Adams' with identifier 'Q42' as the input for the program,
+a possible output of a question could be: 'Where was Douglas Adams educated?', and a correct answer
+would be 'St. John's College'.
+
+This approach comes with a few problems:
+
+* There are thousands of properties and not all of them are equally interesting.
+* Transforming a Wikidata property into a question expressed in natural language is not trivial.
+
+=== Templates
+
+.Available templates
+NOTE: link:Templates.adoc[Here] you can find a list with all the available templates.
+
+A workaround to the problems stated above can be defining _templates_.
+
+Wikidata structures properties by https://www.wikidata.org/wiki/Wikidata:List_of_properties/en[categories].
+Adopting a similar approach we have defined _templates_, that is, groups of properties that are related and have a minimum relevance for
+making questions about them.
+
+A _template_ also links each property with its expression as a question in natural language.
+
+Using the same example as before, a possible _template_ of questions applicable for
+'Douglas Adams' could be
+_'People'_. This template would contain properties that are more likely to appear when the entity is
+a person. A very simple version of _'People'_ could be:
+
+    {
+        "P69" : {
+            "en": "Where was :entity educated?",
+            "es": "¿Dónde fue educado :entity?"
+        },
+        "P27" : {
+            "en": "Which is the country of citizenship of :entity?",
+            "es": "¿De qué país es :entity ciudadano?"
+        }
+    }
+
+This template would define enough information to generate up to 2 questions about an entity, in
+English or Spanish. The keys https://www.wikidata.org/wiki/Property:P69["P69"] and
+https://www.wikidata.org/wiki/Property:P27["P27"] correspond directly to the Wikidata identifier of
+those properties.
+
+As it can be seen, using _templates_ we have managed to solve both problems.
+Only relevant properties to the domain chosen by the user will be used for
+generating the questions, and the application provides well formed questions expressed in natural
+language.
+
+
+=== Generation Process
+
+==== User input
+
+The user must give as input the identifier
+that represents the entity to generate questions about, as well as the identifier of the
+link:Templates.adoc[template that they want to use].
+
+The process starts then by retrieving the questions defined inside the chosen template and
+processing each of them.
+
+
+==== Completion of the statement
+
+First, the question defined in the _template_ as:
+
+    "Where was :entity educated?"
+
+is transformed into:
+
+    "Where was Adam Douglas educated?"
+
+==== Correct answer
+
+For each question defined in the template, we obtain the correct answer to that question by
+querying for the value of the property defined in the question for the given entity.
+
+image:correct_answer.svg[alt=Correct answer structure]
+
+==== Distractors
+
+For obtaining the distractors we follow a similar approach, we want to find entities that appear
+in triples as values of the property that represents the question.
+
+image:distractor.svg[alt=Distractor structure]
+
+NOTE: The node _'?'_ can be any entity except the entity that we are generating questions about (this would mean that the value of the property is a correct answer).
+
+==== Metadata
+
+Additional information is also added to both the correct answer and the distractors.
+This information includes a short description, a label in natural language with the name of the entity and
+a representative image of the entity (if available).

@@ -1,0 +1,8 @@
+[[section-future-improvements]]
+
+== Future improvements
+
+=== Improve flexibility
+
+
+=== Natural language generation
