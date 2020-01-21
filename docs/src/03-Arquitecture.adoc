@@ -1,18 +1,48 @@
 [[section-architecture]]
-
+:imagesdir: ../images
 == Architecture
+
+=== Overall structure
+
+This visual diagram shows a simplified representation of the architecture of the program.
 
 image:architecture.svg[alt=Program Architecture]
 
 === Edpoint Controllers
 
+Responsible for handling the HTTP requests. Defines different endpoints described in link:04-API_Endpoints.html[API Endpoints].
+
+Communicates directly with both the _Search_ and the _Question Generator_ modules to provide
+the functionality.
+
 === Search Module
+
+Performs the search of entities by a representative label. That means, taking a string and passing it to
+_Wikidata Local Service_ module for obtaining a list of related entities.
 
 
 === Questions Generator Module
 
+This module contains the main functionality of the application. It is in charge of the process described in
+link:02-Questions_Generation.html[Questions Generation].
+
+It communicates with the _Categories_ module to obtain the _template_ associated with the input of the user.
+
+For gathering all the information necessary to compose the questions, it makes use of the functionality
+implemented in _Wikidata Local Service_ module, that connects directly to Wikidata's knowledge graph.
 
 === Categories Module
 
+Manages the different _templates_ available and provides them to the _Questions Generator_ module.
+
+NOTE: link:Templates.html[Here] you can find a list with all the available _templates_.
+
 
 === Wikidata Local Service Module
+
+Responsible for handling the communication with Wikidata's API.
+
+Provides different queries and methods for the upper modules to retrieve the information needed.
+
+This module is tightly coupled
+to Wikidata, and any changes to Wikidata's API would require to adapt this module.

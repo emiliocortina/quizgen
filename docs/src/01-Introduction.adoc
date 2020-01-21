@@ -1,4 +1,5 @@
 [[section-introduction-and-goals]]
+:imagesdir: ../images
 == Introduction and Goals
 
 
@@ -30,8 +31,8 @@ purpose, as it allows us to retrieve data dynamically from any domain.
 
 Wikidata is a knowledge base similar to Wikipedia, but it structures its content as linked data.
 
-It uses a few more elements than the ones explained above, below you can find an example with the
-most important terms used in Wikidata.
+It uses a few more elements than the ones explained in the previous section.
+Below you can find an example with the most relevant terms used in Wikidata.
 
 // IMAGEN
 image:Datamodel_in_Wikidata.svg[]

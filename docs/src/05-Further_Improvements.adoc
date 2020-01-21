@@ -1,8 +1,25 @@
 [[section-future-improvements]]
-
+:imagesdir: ../images
 == Future improvements
 
-=== Improve flexibility
+The _templates_ model that the program uses has some limitations.
+
+It requires the user to know the
+(possibly huge amount of) available _templates_.
+
+It is also not easy to maintain for the developers, new properties and domains may appear, which would
+require to define new templates to cover these new properties
+
+However, moving away from the current approach would require to tackle certain points.
+
+=== Selection of properties
+
+Some entities do not have a value defined for certain properties.
+
+The program should infer the type of the entity and automatically
+choose the properties used to generate questions based on the context.
 
 
 === Natural language generation
+
+The program should be able to transform a semantic property into a well-formed question in natural language.

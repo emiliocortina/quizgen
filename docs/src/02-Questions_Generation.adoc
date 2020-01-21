@@ -1,12 +1,13 @@
 [[section-questions-generation]]
-
+:imagesdir: ../images
 == Questions generation
 
 Our goal is to compose questions about an entity.
 We can form questions about an entitiy by asking for the value of its properties.
 
 For instance, in the
-previous example, if we were given 'Douglas Adams' with identifier 'Q42' as the input for the program,
+previous example, if we were given the identifier 'Q42' representing the entity
+'Douglas Adams'  as the input for the program,
 a possible output of a question could be: 'Where was Douglas Adams educated?', and a correct answer
 would be 'St. John's College'.
 
@@ -18,7 +19,7 @@ This approach comes with a few problems:
 === Templates
 
 .Available templates
-NOTE: link:Templates.adoc[Here] you can find a list with all the available templates.
+NOTE: link:Templates.html[Here] you can find a list with all the available templates.
 
 A workaround to the problems stated above can be defining _templates_.
 
@@ -44,14 +45,14 @@ a person. A very simple version of _'People'_ could be:
         }
     }
 
-This template would define enough information to generate up to 2 questions about an entity, in
+This template would define enough information to generate up to two questions about an entity, in
 English or Spanish. The keys https://www.wikidata.org/wiki/Property:P69["P69"] and
 https://www.wikidata.org/wiki/Property:P27["P27"] correspond directly to the Wikidata identifier of
 those properties.
 
 As it can be seen, using _templates_ we have managed to solve both problems.
 Only relevant properties to the domain chosen by the user will be used for
-generating the questions, and the application provides well formed questions expressed in natural
+generating the questions, and the application provides well-formed questions expressed in natural
 language.
 
 
@@ -61,10 +62,13 @@ language.
 
 The user must give as input the identifier
 that represents the entity to generate questions about, as well as the identifier of the
-link:Templates.adoc[template that they want to use].
+link:Templates.html[template that they want to use].
 
 The process starts then by retrieving the questions defined inside the chosen template and
 processing each of them.
+
+Remember that each question is associated with a
+https://www.wikidata.org/wiki/Wikidata:List_of_properties/en[property] of Wikidata.
 
 
 ==== Completion of the statement
@@ -79,14 +83,14 @@ is transformed into:
 
 ==== Correct answer
 
-For each question defined in the template, we obtain the correct answer to that question by
-querying for the value of the property defined in the question for the given entity.
+For each question defined in the template, we first obtain the correct answer.
+This is done by querying the value of the property for the given entity.
 
 image:correct_answer.svg[alt=Correct answer structure]
 
 ==== Distractors
 
-For obtaining the distractors we follow a similar approach, we want to find entities that appear
+For obtaining the distractors we follow a similar approach. We want to find entities that appear
 in triples as values of the property that represents the question.
 
 image:distractor.svg[alt=Distractor structure]
@@ -97,4 +101,4 @@ NOTE: The node _'?'_ can be any entity except the entity that we are generating 
 
 Additional information is also added to both the correct answer and the distractors.
 This information includes a short description, a label in natural language with the name of the entity and
-a representative image of the entity (if available).
+a representative image (if available).
