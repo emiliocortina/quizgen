@@ -13,14 +13,11 @@ def generate_questions(entity_id, questions_category, locale="en"):
     :return: array of question objects.
     """
     templates = get_category_questions(questions_category)
-    if templates is None:
-        return ['Please enter a valid category']
-    else:
-        questions = []
-        for template in templates:
-            q = generate_question(entity_id, template, templates[template], locale)
-            if q is not None:
-                questions.append(q)
+    questions = []
+    for template in templates:
+        q = generate_question(entity_id, template, templates[template], locale)
+        if q is not None:
+            questions.append(q)
     return questions
 
 
