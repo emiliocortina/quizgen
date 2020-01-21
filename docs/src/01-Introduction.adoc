@@ -1,5 +1,4 @@
 [[section-introduction-and-goals]]
-:imagesdir: ../images
 == Introduction and Goals
 
 

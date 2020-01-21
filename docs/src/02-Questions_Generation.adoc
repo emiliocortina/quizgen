@@ -1,5 +1,4 @@
 [[section-questions-generation]]
-:imagesdir: ../images
 == Questions generation
 
 Our goal is to compose questions about an entity.

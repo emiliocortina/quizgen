@@ -1,5 +1,4 @@
 [[section-future-improvements]]
-:imagesdir: ../images
 == Future improvements
 
 The _templates_ model that the program uses has some limitations.

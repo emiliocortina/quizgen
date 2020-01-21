@@ -1,5 +1,4 @@
 [[section-architecture]]
-:imagesdir: ../images
 == Architecture
 
 === Overall structure
