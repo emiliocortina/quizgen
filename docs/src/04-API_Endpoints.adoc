@@ -1,14 +1,35 @@
 [[section-api-endpoints]]
-
 == API Endpoints
 
 === Search by label
 
-Returns.....
+Returns a json file containing the entities that matched with the label.
 
-    /search/<entity_id>
+    /search/entities.json
+
+==== Parameters
+
+|===
+|Name |Required |Description | Default value
+
+|label |required | String used to search for the entities. |
+
+|===
 
 
 === Generate questions
 
-    /entity/<entity_id>?category=<category_id>
+Returns a json file containing the questions generated with the given
+entity and category (_template_).
+
+    /generate/questions.json
+
+==== Parameters
+
+|===
+|Name |Required |Description | Default value
+
+|entity |required | Identifier for the entity used to generate questions about. |
+|category |required |Identifier of the template that will be used.|
+
+|===
