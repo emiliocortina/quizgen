@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Questions generation</title>
+<title>Generación de preguntas</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,63 +441,53 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="section-questions-generation">Questions generation</h2>
+<h2 id="section-questions-generation">Generación de preguntas</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Our goal is to compose questions about an entity.
-We can form questions about an entitiy by asking for the value of its properties.</p>
+<p>Nuestro objetivo es componer preguntas sobre una entidad.
+Podemos formular preguntas sobre una entidad preguntando sobre el valor de sus propiedades.</p>
 </div>
 <div class="paragraph">
-<p>For instance, in the
-previous example, if we were given the identifier 'Q42' representing the entity
-'Douglas Adams'  as the input for the program,
-a possible output of a question could be: 'Where was Douglas Adams educated?', and a correct answer
-would be 'St. John&#8217;s College'.</p>
+<p>Por ejemplo, en el ejemplo anterior, si obtuviéramos como entrada el identificador ‘Q42’ que
+representa la entidad ‘Douglas Adams’, una posible salida sería una pregunta como:
+‘¿Dónde fue educado Douglas Adams?’. Una respuesta correcta a esta pregunta sería ‘St. John’s College’.</p>
 </div>
 <div class="paragraph">
-<p>This approach comes with a few problems:</p>
+<p>Este enfoque trae consigo varios problemas:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>There are thousands of properties and not all of them are equally interesting.</p>
+<p>Hay miles de propiedades y no todas ellas poseen la misma relevancia.</p>
 </li>
 <li>
-<p>Transforming a Wikidata property into a question expressed in natural language is not trivial.</p>
+<p>Transformar una propiedad de Wikidata en el enunciado de una pregunta en lenguaje natural no es una tarea trivial.</p>
 </li>
 </ul>
 </div>
 <div class="sect2">
 <h3 id="_templates">Templates</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="title">Available templates</div>
-<a href="Templates.html">Here</a> you can find a list with all the available templates.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Se puede llegar a una posible solución a los problemas anteriores definiendo <em>plantillas</em>.</p>
+</div>
+<div class="paragraph">
+<p>Wikidata clasifica sus propiedades en <a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">categorías</a>.
+Adoptando un enfoque similar,
+hemos decidido definir <em>plantillas</em>. Una <em>plantilla</em> es un grupo de propiedades conceptualmente
+relacionadas y que tienen cierta relevancia para ser utilizadas en la generación de preguntas.</p>
 </div>
 <div class="paragraph">
 <p>A workaround to the problems stated above can be defining <em>templates</em>.</p>
 </div>
 <div class="paragraph">
-<p>Wikidata structures properties by <a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">categories</a>.
-Adopting a similar approach we have defined <em>templates</em>, that is, groups of properties that are related and have a minimum relevance for
-making questions about them.</p>
+<p>Una <em>plantilla</em> también asocia cada propiedad definida en dicha plantilla con su enunciado como pregunta
+en lenguaje natural.</p>
 </div>
 <div class="paragraph">
-<p>A <em>template</em> also links each property with its expression as a question in natural language.</p>
-</div>
-<div class="paragraph">
-<p>Using the same example as before, a possible <em>template</em> of questions applicable for
-'Douglas Adams' could be
-<em>'People'</em>. This template would contain properties that are more likely to appear when the entity is
-a person. A very simple version of <em>'People'</em> could be:</p>
+<p>Utilizando el mismo ejemplo que anteriormente, una posible plantilla de preguntas que se podría aplicar
+para la entidad 'Douglas Adams' podría ser <em>'Personas'</em>. Esta plantilla contendría propiedades
+que aparecen de manera más frecuente cuando la entidad sobre la que se están generando las preguntas
+es una persona. Una versión simplificada de la plantilla <em>'Personas'</em> podría ser:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -514,70 +504,70 @@ a person. A very simple version of <em>'People'</em> could be:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This template would define enough information to generate up to two questions about an entity, in
-English or Spanish. The keys <a href="https://www.wikidata.org/wiki/Property:P69">"P69"</a> and
-<a href="https://www.wikidata.org/wiki/Property:P27">"P27"</a> correspond directly to the Wikidata identifier of
-those properties.</p>
+<p>Esta plantilla definiría suficiente información para generar hasta dos preguntas sobre una entidad,
+en Inglés o Españos. Las <em>keys</em> <a href="https://www.wikidata.org/wiki/Property:P69">"P69"</a> and
+<a href="https://www.wikidata.org/wiki/Property:P27">"P27"</a> se corresponden directamente con los identificadores
+de dichas propiedades en Wikidata.</p>
 </div>
 <div class="paragraph">
-<p>As it can be seen, using <em>templates</em> we have managed to solve both problems.
-Only relevant properties to the domain chosen by the user will be used for
-generating the questions, and the application provides well-formed questions expressed in natural
-language.</p>
+<p>Como se puede observar, utilizando <em>plantillas</em> hemos conseguido solucionar ambos problemas.
+Solo aquellas propiedades que sean relevantes para el dominio elegido por el usuario serán utilzadas
+para la realización de preguntas. Así mismo,la aplicación solo proporcionará como salida
+preguntas bien formuladas en lenguaje natural.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_generation_process">Generation Process</h3>
+<h3 id="_proceso_de_generación">Proceso de generación</h3>
 <div class="sect3">
-<h4 id="_user_input">User input</h4>
+<h4 id="_entrada_del_usuario">Entrada del usuario</h4>
 <div class="paragraph">
-<p>The user must give as input the identifier
-that represents the entity to generate questions about, as well as the identifier of the
-<a href="Templates.html">template that they want to use</a>.</p>
+<p>El usuario debe proporcionar como entrada el identificador que representa la entidad sobre la cual
+se generarán las preguntas. Así como el identificador de la plantilla que quieren utilizar (se
+deja a elección del usuario el dominio de las preguntas).</p>
 </div>
 <div class="paragraph">
-<p>The process starts then by retrieving the questions defined inside the chosen template and
-processing each of them.</p>
+<p>El proceso comienza entonces obteniendo las preguntas definidas en la plantilla elegida por el usuario
+y procesando cada una de ellas.</p>
 </div>
 <div class="paragraph">
-<p>Remember that each question is associated with a
-<a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">property</a> of Wikidata.</p>
+<p>Como se ha expresado anteriormente, hemos asociado cada pregunta con una
+<a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">propiedad</a> de Wikidata.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_completion_of_the_statement">Completion of the statement</h4>
+<h4 id="_generación_del_enunciado">Generación del enunciado</h4>
 <div class="paragraph">
-<p>First, the question defined in the <em>template</em> as:</p>
+<p>Primero, el enunciado de la pregunta definido en la _plantilla como:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>"Where was :entity educated?"</pre>
+<pre>"¿Dónde fue :entity educado?"</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>is transformed into:</p>
+<p>es transformada en:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>"Where was Adam Douglas educated?"</pre>
+<pre>"¿Dónde fue Douglas Adams educado?"</pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_correct_answer">Correct answer</h4>
+<h4 id="_respuesta_correcta">Respuesta correcta</h4>
 <div class="paragraph">
-<p>For each question defined in the template, we first obtain the correct answer.
-This is done by querying the value of the property for the given entity.</p>
+<p>Para cada pregunta definida en la plantilla, comenzamos obteniendo la respuesta correcta.
+Esto se consigue haciendo una consulta para obtener el valor de dicha propiedad para la entidad dada.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="correct_answer.svg" alt="Correct answer structure"></span></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_distractors">Distractors</h4>
+<h4 id="_distractores">Distractores</h4>
 <div class="paragraph">
-<p>For obtaining the distractors we follow a similar approach. We want to find entities that appear
-in triples as values of the property that represents the question.</p>
+<p>Para obtener los diferentes distractores seguimos un enfoque similar. Queremos encontrar entidades que
+aparezcan en tripletas como valores de la propiedad que representa la pregunta.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="distractor.svg" alt="Distractor structure"></span></p>
@@ -589,18 +579,19 @@ in triples as values of the property that represents the question.</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-The node <em>'?'</em> can be any entity except the entity that we are generating questions about (this would mean that the value of the property is a correct answer).
+El nodo <em>'?'</em> puede ser cualquier entidad excepto la entidad sobre la que estamos generando las
+preguntas (en dicho caso el valor de la propiedad sería una respuesta correcta).
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_metadata">Metadata</h4>
+<h4 id="_metadatos">Metadatos</h4>
 <div class="paragraph">
-<p>Additional information is also added to both the correct answer and the distractors.
-This information includes a short description, a label in natural language with the name of the entity and
-a representative image (if available).</p>
+<p>Información adicional es añadida por último tanto a la respuesta correcta como a los distractores.
+Esta información incluye una breve descripción, una etiqueta con su nombre en lenguaje natural y una
+imagen representativa (si se encuentra disponible).</p>
 </div>
 </div>
 </div>
@@ -609,7 +600,7 @@ a representative image (if available).</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-21 12:03:46 +0100
+Last updated 2020-01-29 12:26:34 +0100
 </div>
 </div>
 </body>

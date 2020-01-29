@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Architecture</title>
+<title>Arquitectura</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,12 +441,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="section-architecture">Architecture</h2>
+<h2 id="section-architecture">Arquitectura</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_overall_structure">Overall structure</h3>
+<h3 id="_estructura_general">Estructura general</h3>
 <div class="paragraph">
-<p>This visual diagram shows a simplified representation of the architecture of the program.</p>
+<p>Este diagrama visual muestra una representación simplificada de la arquitectura del programa.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="architecture.svg" alt="Program Architecture"></span></p>
@@ -455,63 +455,55 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_edpoint_controllers">Edpoint Controllers</h3>
 <div class="paragraph">
-<p>Responsible for handling the HTTP requests. Defines different endpoints described in <a href="04-API_Endpoints.html">API Endpoints</a>.</p>
+<p>Responsables de gestionar las peticiones HTTP. Expone diferentes <em>endpoints</em> descritos en la seccion <em>API Endpoints</em>.</p>
 </div>
 <div class="paragraph">
-<p>Communicates directly with both the <em>Search</em> and the <em>Question Generator</em> modules to provide
-the functionality.</p>
+<p>Se comunica de forma directa tanto con el módulo <em>Search</em> como con <em>Question Generator</em> para que lleven
+a cabo la funcionalidad necesaria.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_search_module">Search Module</h3>
 <div class="paragraph">
-<p>Performs the search of entities by a representative label. That means, taking a string and passing it to
-<em>Wikidata Local Service</em> module for obtaining a list of related entities.</p>
+<p>Se encarga de realizar la búsqueda de entidades a partir de una etiqueta representativa.
+Esto es, recibe una <em>string</em> y utiliza el módulo <em>Wikidata Local Service</em> para obtener una lista de
+entidades relacionadas.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_questions_generator_module">Questions Generator Module</h3>
 <div class="paragraph">
-<p>This module contains the main functionality of the application. It is in charge of the process described in
-<a href="02-Questions_Generation.html">Questions Generation</a>.</p>
+<p>Este módulo contiene la funcionalidad principal de la aplicación. Se encarga del proceso descrito en la
+sección <em>Questions Generation</em>.</p>
 </div>
 <div class="paragraph">
-<p>It communicates with the <em>Categories</em> module to obtain the <em>template</em> associated with the input of the user.</p>
+<p>Se comunica con el módulo <em>Categories</em> para obtener la <em>plantilla</em> elegida por el usuario.</p>
 </div>
 <div class="paragraph">
-<p>For gathering all the information necessary to compose the questions, it makes use of the functionality
-implemented in <em>Wikidata Local Service</em> module, that connects directly to Wikidata&#8217;s knowledge graph.</p>
+<p>Para recopilar toda la información necesaria para componer las preguntas, hace uso de la funcionalidad
+implementada en el módulo <em>Wikidata Local Service</em>, que se conecta direntamente al grafo de conocimiento
+de Wikidata.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_categories_module">Categories Module</h3>
 <div class="paragraph">
-<p>Manages the different <em>templates</em> available and provides them to the <em>Questions Generator</em> module.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<a href="Templates.html">Here</a> you can find a list with all the available <em>templates</em>.
-</td>
-</tr>
-</table>
+<p>Gestiona las diferentes <em>plantillas</em> disponibles y se las proporciona al módulo  <em>Questions Generator</em>
+para que genere las preguntas.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_wikidata_local_service_module">Wikidata Local Service Module</h3>
 <div class="paragraph">
-<p>Responsible for handling the communication with Wikidata&#8217;s API.</p>
+<p>Es el responsable de gestionar la comunicación con la API de Wikidata.</p>
 </div>
 <div class="paragraph">
-<p>Provides different queries and methods for the upper modules to retrieve the information needed.</p>
+<p>Proporciona diferentes consultas y funciones a los módulos superiores para conseguir la información que
+necesitan.</p>
 </div>
 <div class="paragraph">
-<p>This module is tightly coupled
-to Wikidata, and any changes to Wikidata&#8217;s API would require to adapt this module.</p>
+<p>Este módulo está altamente acoplado a la implementación de la API de Wikidata. Cualquier cambio en la
+especificación de dicha API podría significar tener que adaptar este módulo a dichos cambios.</p>
 </div>
 </div>
 </div>
@@ -519,7 +511,7 @@ to Wikidata, and any changes to Wikidata&#8217;s API would require to adapt this
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-21 12:03:48 +0100
+Last updated 2020-01-29 12:36:26 +0100
 </div>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Introduction and Goals</title>
+<title>Introducción y objetivos</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,52 +441,64 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="section-introduction-and-goals">Introduction and Goals</h2>
+<h2 id="section-introduction-and-goals">Introducción y objetivos</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_project_overview">Project Overview</h3>
+<h3 id="_visión_general">Visión general</h3>
 <div class="paragraph">
-<p>The project consists on a REST API that shall provide basic functionality to generate multiple choice questions, using
-Wikidata&#8217;s knowledge graph as the source of information.</p>
+<p>El proyecto consiste en una API REST que proporciona la funcionalidad necesaria para generar preguntas
+‘tipo test’, esto es, preguntas con múltiples opciones para elegir como respuesta.
+Para realizar la generación de preguntas se utilizará como fuente de información el grafo de conocimiento
+de Wikidata.</p>
+</div>
+<div class="paragraph">
+<p>En este documento se describirá cómo se realiza el proceso para generar las preguntas junto con sus
+respuestas, la arquitectura del proyecto software, la descripción de los ‘endpoints’ que expone la
+API y, por último, futuros caminos de mejoras para continuar el proyecto.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_linked_data">Linked data</h3>
 <div class="paragraph">
-<p>Linked Data is structured data which is interlinked with other data. Linked Data can be expressed as semantic triples,
-or simply triple. As its name indicates, a triple is a set of three entities that codifies a statement about semantic
-data in the form of subject–predicate–object expressions (e.g. "Bob is 35", or "Bob knows John").</p>
+<p>Linked Data son datos estructurados que están interconectados con otros datos.
+Linked Data puede expresarse como tripletas semánticas, o simplemente tripletas.
+Como su nombre indica, una tripleta es un conjunto de tres entidades que codifica un
+enunciado sobre datos semánticos en la forma de una expresión sujeto-predicado objeto
+("Bob edad 35", or "Bob conoce_a John”).</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="triple.svg" alt="Semantic Triple"></span></p>
 </div>
 <div class="paragraph">
-<p>These links result in knowledge graphs of entities and
-the relationships between them.</p>
+<p>Estas conexiones tienen como resultado grafos de información constituidos por las entidades y
+las relaciones entre ellas.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="graph.svg" alt="Graph with several entities"></span></p>
 </div>
 <div class="paragraph">
-<p>Part of the vision of linked data is for the Internet to become a global database. This is specially useful for our
-purpose, as it allows us to retrieve data dynamically from any domain.</p>
+<p>Parte de la visión de Linked Data es convertir a internet en una base de datos global.
+Esto es especialmente útil para nuestro proyecto, ya que nos permite obtener información de
+forma dinámica sobre cualquier dominio.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_wikidata">Wikidata</h3>
 <div class="paragraph">
-<p>Wikidata is a knowledge base similar to Wikipedia, but it structures its content as linked data.</p>
+<p>Wikidata es una base de conocimiento similar a Wikipedia, sin embargo, estructura su contenido
+codificándolo como Linked Data.</p>
 </div>
 <div class="paragraph">
-<p>It uses a few more elements than the ones explained in the previous section.
-Below you can find an example with the most relevant terms used in Wikidata.</p>
+<p>Utiliza algunos elementos adicionales a los descritos en la sección anterior.
+Estos son algunos ejemplos de dichos elementos que Wikidata utiliza para estructurar su contenido:</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="Datamodel_in_Wikidata.svg" alt="Datamodel in Wikidata"></span></p>
 </div>
 <div class="paragraph">
-<p>Wikidata exposes a public <a href="https://www.wikidata.org/wiki/Wikidata:Data_access">API</a> that we use to query
-against its data set using the semantic query language <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a>.</p>
+<p>Wikidata expone una API pública que utilizaremos para realizar consultas y obtener la
+información de su grafo de conocimiento.
+Para realizar dichas consultas utilizaremos en lenguaje SPARQL.</p>
 </div>
 </div>
 </div>
@@ -494,7 +506,7 @@ against its data set using the semantic query language <a href="https://en.wikip
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-21 12:03:41 +0100
+Last updated 2020-01-29 12:08:47 +0100
 </div>
 </div>
 </body>

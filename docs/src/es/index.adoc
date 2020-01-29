@@ -1,0 +1,38 @@
+// configure EN settings for asciidoc
+include::config.adoc[]
+
+= image:quiz.svg[Sunset,70] Quizgen
+// toc-title definition MUST follow document title without blank line!
+:toc-title: Table of Contents
+
+
+// numbering from here on
+:numbered:
+<<<<
+// 1. Introduction and Goals
+include::01-Introduction.adoc[]
+
+
+<<<<
+// 3. Questions generation
+include::02-Questions_Generation.adoc[]
+
+
+<<<<
+// 2. Architecture Constraints
+include::03-Arquitecture.adoc[]
+
+
+<<<<
+// 4. API Endpoints
+include::04-API_Endpoints.adoc[]
+
+<<<<
+// 5. Further improvements
+include::05-Further_Improvements.adoc[]
+
+<<<<
+// 6. Runtime View
+include::06-Bibliography.adoc[]
+
+

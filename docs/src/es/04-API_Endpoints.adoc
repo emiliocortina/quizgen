@@ -1,0 +1,35 @@
+[[section-api-endpoints]]
+== API Endpoints
+
+=== Buscar por etiqueta
+
+Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.
+
+    /search/entities.json
+
+==== Parámetros
+
+|===
+|Nombre |Requerido |Descripción | Valor por defecto
+
+|label |requerido | String utilizada para buscar las entidades. |
+
+|===
+
+
+=== Generar preguntas
+
+Devuelve un archivo json conteniendo las preguntas generadas para la entidad y categoría (_plantilla_)
+dadas.
+
+    /generate/questions.json
+
+==== Parameters
+
+|===
+|Nombre |Requerido |Descripción | Valor por defecto
+
+|entity |requerido | Identificador asociado a la entidad sobre la que se realizarán las preguntas. |
+|category |requerido |Identificador asociado a la plantilla que se utilizará para generar las preguntas.|
+
+|===
