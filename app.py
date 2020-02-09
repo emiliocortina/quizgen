@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 from src.exceptions.invalid_usage import InvalidUsage
 from src.search.entity_search import search_entities
 from src.generator.questions_generator import generate_questions
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
