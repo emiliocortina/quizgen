@@ -13,7 +13,6 @@ Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entid
 |Nombre |Requerido |Descripción | Valor por defecto
 
 |label |requerido | String utilizada para buscar las entidades. |
-
 |===
 
 

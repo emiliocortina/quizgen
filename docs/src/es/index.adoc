@@ -36,3 +36,7 @@ include::05-Further_Improvements.adoc[]
 include::06-Bibliography.adoc[]
 
 
+<<<<
+// 5. Further improvements
+include::Templates.adoc[]
+

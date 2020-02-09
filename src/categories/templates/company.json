@@ -1,0 +1,129 @@
+{
+  "P571": {
+    "name": "Inception",
+    "en": "When was %s founded?",
+    "es": "¿Cúando se fundó %s?"
+  },
+  "P159": {
+    "name": "Headquarters location",
+    "en": "Where are %s headquarters located?",
+    "es": "¿Dónde están las oficinas de %s?"
+  },
+  "P17": {
+    "name": "Country",
+    "en": "In which country is %s based?",
+    "es": "¿En qué país se encuentra %s?"
+  },
+  "P154": {
+    "name": "Logo",
+    "en": "Which is the logo of %s?",
+    "es": "¿Cuál es el logo de %s?"
+  },
+  "P1454": {
+    "name": "Legal form",
+    "en": "What is %s legal form?",
+    "es": "¿Cuál es la forma legal de %s?"
+  },
+  "P452": {
+    "name": "Industry",
+    "en": "Which is the industry of %s?",
+    "es": "¿Cuál es la industria de %s?"
+  },
+  "P127": {
+    "name": "Owned by",
+    "en": "Who owns %s?",
+    "es": "¿Quién es el propietario de %s?"
+  },
+  "P414": {
+    "name": "Stock Exchange",
+    "en": "In which stock exchange is %s traded?",
+    "es": "¿En qué mercado cotiza %s?"
+  },
+  "P740": {
+    "name": "Location of formation",
+    "en": "Where was %s created?",
+    "es": "¿Dónde se originó %s?"
+  },
+  "P856": {
+    "name": "Official website",
+    "en": "Which is %s official website?",
+    "es": "¿Cuál es el sitio web oficial de %s?"
+  },
+  "P1448": {
+    "name": "Official name",
+    "en": "What's %s official name?",
+    "es": "¿Cuál es el nombre oficial de %s?"
+  },
+  "P1128": {
+    "name": "Number of employees",
+    "en": "How many people work at %s?",
+    "es": "¿Cuánta gente trabaja en %s?"
+  },
+  "P2403": {
+    "name": "Total assets",
+    "en": "What's the value of assets held by %s?",
+    "es": "¿Cuál es el valor de los activos de %s?"
+  },
+  "P2138": {
+    "name": "Total liabilities",
+    "en": "What's the value of liabilities held by %s?",
+    "es": "¿Cuál es el valor de los pasivos de %s?"
+  },
+  "P2137": {
+    "name": "Total equity",
+    "en": "What's the value of equity of %s?",
+    "es": "¿Cuál es el valor del capital propio de %s?"
+  },
+  "P2226": {
+    "name": "Market capitalization",
+    "en": "What's the total value of issued shares by %s?",
+    "es": "¿Cuál es el valor de la capitalización bursátil de %s?"
+  },
+  "P1830": {
+    "name": "Owner of",
+    "en": "Which entity is owned by %s?",
+    "es": "¿Cuál de las siguientes entidades es propiedad de %s?"
+  },
+  "P169": {
+    "name": "CEO",
+    "en": "Who is the CEO of %s?",
+    "es": "¿Quién es el CEO de %s?"
+  },
+  "P1789": {
+    "name": "COO",
+    "en": "Who is the Chief Operating Officer (COO) of %s?",
+    "es": "¿Quién es el Chief Operating Officer (COO) de %s?"
+  },
+  "P112": {
+    "name": "Founded by",
+    "en": "Who is the founder of %s?",
+    "es": "¿Quién fundó %s?"
+  },
+  "P1037": {
+    "name": "Director/Manager",
+    "en": "Who is the director/manager of %s?",
+    "es": "¿Quién es el director de %s?"
+  },
+  "P3320": {
+    "name": "Board Member",
+    "en": "Who is a member of the board of %s?",
+    "es": "¿Quién es un miembro del consejo de %s?"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

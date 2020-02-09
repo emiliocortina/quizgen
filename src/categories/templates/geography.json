@@ -12,12 +12,12 @@
   "P47": {
     "name": "Border",
     "en": "%s shares border with...",
-    "es": "%s tiene frontera con..."
+    "es": "%s hace frontera con..."
   },
   "P1549": {
     "name": "Demonym",
     "en": "How are the people from %s called?",
-    "es": "¿Cómo se llaman los habitantes de %s?"
+    "es": "¿Cómo se denominan los habitantes de %s?"
   },
   "P17": {
     "name": "Country",
@@ -27,6 +27,6 @@
     "P6": {
     "name": "Head of government",
     "en": "Who is the head of government of %s?",
-    "es": "¿Quién es el governante principal de %s?"
+    "es": "¿Quién es el jefe de gobierno de %s?"
   }
 }
