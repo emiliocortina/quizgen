@@ -3,22 +3,34 @@ from requests.exceptions import ReadTimeout
 from src.categories.manager import get_category_questions
 
 
-def generate_questions(entity_id, questions_category, locale="en"):
+def generate_questions(entity_id, questions_category, questions_limit=None, locale="en"):
     """
     Main function that generates an array of questions about a given entity.
     :param entity_id: (Wikidata) Identifier for the entity used to generate the questions.
     :param questions_category: (Wikidata) Identifier that represent a group of properties that are related
      between them (category).
+    :param questions_limit: maximum number of questions that will be generated
     :param locale: language used to return the questions.
     :return: array of question objects.
     """
     templates = get_category_questions(questions_category)
     questions = []
+    limit = get_questions_limit(questions_limit)
     for template in templates:
         q = generate_question(entity_id, template, templates[template], locale)
         if q is not None:
             questions.append(q)
+        if len(questions) >= limit:
+            break
     return questions
+
+
+def get_questions_limit(questions_limit):
+    try:
+        questions_limit = int(questions_limit)
+        return questions_limit
+    except:
+        return float("inf")
 
 
 def generate_question(entity_id, property_id, statement, locale):
