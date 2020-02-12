@@ -21,7 +21,7 @@ def search_entities_by_label():
     :return: entities with their associated identifiers.
     """
     label = request.args.get('label')
-    if label is None:
+    if label is None or len(label.strip()) == 0:
         raise InvalidUsage('Please enter the label.', status_code=404)
     entities = search_entities(label)
     return jsonify(entities)
