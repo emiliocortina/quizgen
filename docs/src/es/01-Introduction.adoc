@@ -1,0 +1,51 @@
+[[section-introduction-and-goals]]
+== Introducción y objetivos
+
+
+=== Visión general
+El proyecto consiste en una API REST que proporciona la funcionalidad necesaria para generar preguntas
+‘tipo test’, esto es, preguntas con múltiples opciones para elegir como respuesta.
+Para realizar la generación de preguntas se utilizará como fuente de información el grafo de conocimiento
+de Wikidata.
+
+En este documento se describirá cómo se realiza el proceso para generar las preguntas junto con sus
+respuestas, la arquitectura del proyecto software, la descripción de los ‘endpoints’ que expone la
+API y, por último, futuros caminos de mejoras para continuar el proyecto.
+
+
+=== Linked data
+
+Linked Data son datos estructurados que están interconectados con otros datos.
+Linked Data puede expresarse como tripletas semánticas, o simplemente tripletas.
+Como su nombre indica, una tripleta es un conjunto de tres entidades que codifica un
+enunciado sobre datos semánticos en la forma de una expresión sujeto-predicado objeto
+("Bob edad 35", or "Bob conoce_a John”).
+
+// IMAGEN SUBJECT PREDICATE OBJECT
+image:triple.svg[alt=Semantic Triple]
+
+Estas conexiones tienen como resultado grafos de información constituidos por las entidades y
+las relaciones entre ellas.
+
+// IMAGEN SEVERAL ENTITIES
+image:graph.svg[alt=Graph with several entities]
+
+Parte de la visión de Linked Data es convertir a internet en una base de datos global.
+Esto es especialmente útil para nuestro proyecto, ya que nos permite obtener información de
+forma dinámica sobre cualquier dominio.
+
+
+=== Wikidata
+
+Wikidata es una base de conocimiento similar a Wikipedia, sin embargo, estructura su contenido
+codificándolo como Linked Data.
+
+Utiliza algunos elementos adicionales a los descritos en la sección anterior.
+Estos son algunos ejemplos de dichos elementos que Wikidata utiliza para estructurar su contenido:
+
+// IMAGEN
+image:Datamodel_in_Wikidata.svg[]
+
+Wikidata expone una API pública que utilizaremos para realizar consultas y obtener la
+información de su grafo de conocimiento.
+Para realizar dichas consultas utilizaremos en lenguaje SPARQL.

@@ -2,6 +2,8 @@ import time
 
 import requests
 
+from src.exceptions.invalid_usage import InvalidUsage
+
 correct_answer_query = """
     SELECT
       ?entity (SAMPLE(?type) AS ?entityType) (SAMPLE(?label) AS  ?entityLabel)
@@ -130,4 +132,6 @@ def search_wd_entities(label):
     keys = []
     for i in range(0, length):
         keys.append(objects[i])
+    if len(keys) == 0:
+        raise InvalidUsage('No entities found for given label.', status_code=404)
     return keys

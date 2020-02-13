@@ -1,0 +1,51 @@
+== Anexo
+
+=== Templates disponibles
+
+==== Q18608993 (_Companies_)
+
+|===
+|Propiedad |Nombre |Enunciado (Español) |Enunciado (Inglés)
+
+| https://www.wikidata.org/wiki/Property:P571[P571] |Inception |¿Cúando se fundó %s? |When was %s founded?
+| https://www.wikidata.org/wiki/Property:P159[P159] |Headquarters location |¿Dónde están las oficinas de %s? |
+Where are %s headquarters located?
+| https://www.wikidata.org/wiki/Property:P17[P17] |Country |¿En qué país se encuentra %s?  |In which country is %s based?
+| https://www.wikidata.org/wiki/Property:P154[P154] |Logo |¿Cuál es el logo de %s?  |Which is the logo of %s?
+| https://www.wikidata.org/wiki/Property:P1454[P1454] |Legal form |What is %s legal form? | Legal form
+| https://www.wikidata.org/wiki/Property:P452[P452] |Industry |¿Cuál es la industria de %s? |Which is the industry of %s?
+| https://www.wikidata.org/wiki/Property:P127[P127] |Owned by |¿Quién es el propietario de %s? |Who owns %s?
+| https://www.wikidata.org/wiki/Property:P414[P414] |Stock Exchange |¿En qué mercado cotiza %s? |In which stock exchange is %s traded?
+| https://www.wikidata.org/wiki/Property:P740[P740] |Location of formation |¿Dónde se originó %s? |Where was %s created?
+| https://www.wikidata.org/wiki/Property:P856[P856] |Official website |Which is %s official website? |¿Cuál es el sitio web oficial de %s?
+| https://www.wikidata.org/wiki/Property:P1448[P1448] |Official name |¿Cuál es el nombre oficial de %s? |What's %s official name?
+| https://www.wikidata.org/wiki/Property:P1128[P1128] |Number of employees |¿Cuánta gente trabaja en %s? |How many people work at %s?
+| https://www.wikidata.org/wiki/Property:P2403[P2403] |Total assets |What's the value of assets held by %s? |¿Cuál es el valor de los activos de %s?
+| https://www.wikidata.org/wiki/Property:P2138[P2138] |Total liabilities |¿Cuál es el valor de los pasivos de %s? |What's the value of liabilities held by %s?
+| https://www.wikidata.org/wiki/Property:P2137[P2137] |Total equity |¿Cuál es el valor del capital propio de %s? |What's the value of equity of %s?
+| https://www.wikidata.org/wiki/Property:P2226[P2226] |Market capitalization |¿Cuál es el valor de la capitalización bursátil de %s? |What's the total value of issued shares by %s?
+| https://www.wikidata.org/wiki/Property:P1830[P1830] |Owner of |¿Cuál de las siguientes entidades es propiedad de %s? |Which entity is owned by %s?
+| https://www.wikidata.org/wiki/Property:P169[P169] |CEO |¿Quién es el CEO de %s? |Who is the CEO of %s?
+| https://www.wikidata.org/wiki/Property:P1789[P1789] |COO |¿Quién es el Chief Operating Officer (COO) de %s? |Who is the Chief Operating Officer (COO) of %s?
+| https://www.wikidata.org/wiki/Property:P112[P112] |Founded by |¿Quién fundó %s? |Who is the founder of %s?
+| https://www.wikidata.org/wiki/Property:P1037[P1037] |Director/Manager |¿Quién es el director de %s? |Who is the director/manager of %s?
+| https://www.wikidata.org/wiki/Property:P3320[P3320] |Board Member |¿Quién es un miembro del consejo de %s? |Who is a member of the board of %s?
+
+
+|===
+
+
+==== Q52511956 (_Geography_)
+
+|===
+|Propiedad |Nombre |Enunciado (Español) |Enunciado (Inglés)
+
+| https://www.wikidata.org/wiki/Property:P30[P30] |Continent |¿En qué continente se encuentra %s? |In which continent is %s located?
+| https://www.wikidata.org/wiki/Property:P36[P36] |Capital |¿Cuál es la capital de %s? |Which is the capital of %s?
+| https://www.wikidata.org/wiki/Property:P47[P47] |Border |%s hace frontera con... |%s shares border with...
+| https://www.wikidata.org/wiki/Property:P1549[P1549] |Demonym |¿Cómo se denominan los habitantes de %s? |How are the people from %s called?
+| https://www.wikidata.org/wiki/Property:P17[P17] |Country |¿En qué país se encuentra %s? |In which country is %s located?
+| https://www.wikidata.org/wiki/Property:P6[P6] |Head of government |Who is the head of government of %s? |¿Quién es el jefe de gobierno de %s?
+
+|===
+

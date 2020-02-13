@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Bibliografía</title>
+<title>Quizgen</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,15 +438,485 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
+<h1><span class="image"><img src="../images/quiz.svg" alt="Sunset" width="70"></span> Quizgen</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#section-introduction-and-goals">1. Introducción y objetivos</a>
+<ul class="sectlevel2">
+<li><a href="#_visión_general">1.1. Visión general</a></li>
+<li><a href="#_linked_data">1.2. Linked data</a></li>
+<li><a href="#_wikidata">1.3. Wikidata</a></li>
+</ul>
+</li>
+<li><a href="#section-questions-generation">2. Generación de preguntas</a>
+<ul class="sectlevel2">
+<li><a href="#_templates">2.1. Templates</a></li>
+<li><a href="#_proceso_de_generación">2.2. Proceso de generación</a></li>
+</ul>
+</li>
+<li><a href="#section-architecture">3. Arquitectura</a>
+<ul class="sectlevel2">
+<li><a href="#_estructura_general">3.1. Estructura general</a></li>
+<li><a href="#_edpoint_controllers">3.2. Edpoint Controllers</a></li>
+<li><a href="#_search_module">3.3. Search Module</a></li>
+<li><a href="#_questions_generator_module">3.4. Questions Generator Module</a></li>
+<li><a href="#_categories_module">3.5. Categories Module</a></li>
+<li><a href="#_wikidata_local_service_module">3.6. Wikidata Local Service Module</a></li>
+</ul>
+</li>
+<li><a href="#section-api-endpoints">4. API Endpoints</a>
+<ul class="sectlevel2">
+<li><a href="#_buscar_por_etiqueta">4.1. Buscar por etiqueta</a></li>
+<li><a href="#_generar_preguntas">4.2. Generar preguntas</a></li>
+</ul>
+</li>
+<li><a href="#section-future-improvements">5. Futuras mejoras</a>
+<ul class="sectlevel2">
+<li><a href="#_selección_de_propiedades">5.1. Selección de propiedades</a></li>
+<li><a href="#_generación_en_lenguaje_natural">5.2. Generación en lenguaje natural</a></li>
+</ul>
+</li>
+<li><a href="#section-bibliography">6. Bibliografía</a>
+<ul class="sectlevel2">
+<li><a href="#_wikidata_2">6.1. Wikidata</a></li>
+<li><a href="#_python">6.2. Python</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="section-bibliography">Bibliografía</h2>
+<h2 id="section-introduction-and-goals">1. Introducción y objetivos</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_wikidata">Wikidata</h3>
+<h3 id="_visión_general">1.1. Visión general</h3>
+<div class="paragraph">
+<p>El proyecto consiste en una API REST que proporciona la funcionalidad necesaria para generar preguntas
+‘tipo test’, esto es, preguntas con múltiples opciones para elegir como respuesta.
+Para realizar la generación de preguntas se utilizará como fuente de información el grafo de conocimiento
+de Wikidata.</p>
+</div>
+<div class="paragraph">
+<p>En este documento se describirá cómo se realiza el proceso para generar las preguntas junto con sus
+respuestas, la arquitectura del proyecto software, la descripción de los ‘endpoints’ que expone la
+API y, por último, futuros caminos de mejoras para continuar el proyecto.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_linked_data">1.2. Linked data</h3>
+<div class="paragraph">
+<p>Linked Data son datos estructurados que están interconectados con otros datos.
+Linked Data puede expresarse como tripletas semánticas, o simplemente tripletas.
+Como su nombre indica, una tripleta es un conjunto de tres entidades que codifica un
+enunciado sobre datos semánticos en la forma de una expresión sujeto-predicado objeto
+("Bob edad 35", or "Bob conoce_a John”).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/triple.svg" alt="Semantic Triple"></span></p>
+</div>
+<div class="paragraph">
+<p>Estas conexiones tienen como resultado grafos de información constituidos por las entidades y
+las relaciones entre ellas.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/graph.svg" alt="Graph with several entities"></span></p>
+</div>
+<div class="paragraph">
+<p>Parte de la visión de Linked Data es convertir a internet en una base de datos global.
+Esto es especialmente útil para nuestro proyecto, ya que nos permite obtener información de
+forma dinámica sobre cualquier dominio.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wikidata">1.3. Wikidata</h3>
+<div class="paragraph">
+<p>Wikidata es una base de conocimiento similar a Wikipedia, sin embargo, estructura su contenido
+codificándolo como Linked Data.</p>
+</div>
+<div class="paragraph">
+<p>Utiliza algunos elementos adicionales a los descritos en la sección anterior.
+Estos son algunos ejemplos de dichos elementos que Wikidata utiliza para estructurar su contenido:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/Datamodel_in_Wikidata.svg" alt="Datamodel in Wikidata"></span></p>
+</div>
+<div class="paragraph">
+<p>Wikidata expone una API pública que utilizaremos para realizar consultas y obtener la
+información de su grafo de conocimiento.
+Para realizar dichas consultas utilizaremos en lenguaje SPARQL.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-questions-generation">2. Generación de preguntas</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nuestro objetivo es componer preguntas sobre una entidad.
+Podemos formular preguntas sobre una entidad preguntando sobre el valor de sus propiedades.</p>
+</div>
+<div class="paragraph">
+<p>Por ejemplo, en el ejemplo anterior, si obtuviéramos como entrada el identificador ‘Q42’ que
+representa la entidad ‘Douglas Adams’, una posible salida sería una pregunta como:
+‘¿Dónde fue educado Douglas Adams?’. Una respuesta correcta a esta pregunta sería ‘St. John’s College’.</p>
+</div>
+<div class="paragraph">
+<p>Este enfoque trae consigo varios problemas:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Hay miles de propiedades y no todas ellas poseen la misma relevancia.</p>
+</li>
+<li>
+<p>Transformar una propiedad de Wikidata en el enunciado de una pregunta en lenguaje natural no es una tarea trivial.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_templates">2.1. Templates</h3>
+<div class="paragraph">
+<p>Se puede llegar a una posible solución a los problemas anteriores definiendo <em>plantillas</em>.</p>
+</div>
+<div class="paragraph">
+<p>Wikidata clasifica sus propiedades en <a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">categorías</a>.
+Adoptando un enfoque similar,
+hemos decidido definir <em>plantillas</em>. Una <em>plantilla</em> es un grupo de propiedades conceptualmente
+relacionadas y que tienen cierta relevancia para ser utilizadas en la generación de preguntas.</p>
+</div>
+<div class="paragraph">
+<p>A workaround to the problems stated above can be defining <em>templates</em>.</p>
+</div>
+<div class="paragraph">
+<p>Una <em>plantilla</em> también asocia cada propiedad definida en dicha plantilla con su enunciado como pregunta
+en lenguaje natural.</p>
+</div>
+<div class="paragraph">
+<p>Utilizando el mismo ejemplo que anteriormente, una posible plantilla de preguntas que se podría aplicar
+para la entidad 'Douglas Adams' podría ser <em>'Personas'</em>. Esta plantilla contendría propiedades
+que aparecen de manera más frecuente cuando la entidad sobre la que se están generando las preguntas
+es una persona. Una versión simplificada de la plantilla <em>'Personas'</em> podría ser:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{
+    "P69" : {
+        "en": "Where was :entity educated?",
+        "es": "¿Dónde fue educado :entity?"
+    },
+    "P27" : {
+        "en": "Which is the country of citizenship of :entity?",
+        "es": "¿De qué país es :entity ciudadano?"
+    }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Esta plantilla definiría suficiente información para generar hasta dos preguntas sobre una entidad,
+en Inglés o Españos. Las <em>keys</em> <a href="https://www.wikidata.org/wiki/Property:P69">"P69"</a> and
+<a href="https://www.wikidata.org/wiki/Property:P27">"P27"</a> se corresponden directamente con los identificadores
+de dichas propiedades en Wikidata.</p>
+</div>
+<div class="paragraph">
+<p>Como se puede observar, utilizando <em>plantillas</em> hemos conseguido solucionar ambos problemas.
+Solo aquellas propiedades que sean relevantes para el dominio elegido por el usuario serán utilzadas
+para la realización de preguntas. Así mismo,la aplicación solo proporcionará como salida
+preguntas bien formuladas en lenguaje natural.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_proceso_de_generación">2.2. Proceso de generación</h3>
 <div class="sect3">
-<h4 id="_wikidata_api">Wikidata API</h4>
+<h4 id="_entrada_del_usuario">2.2.1. Entrada del usuario</h4>
+<div class="paragraph">
+<p>El usuario debe proporcionar como entrada el identificador que representa la entidad sobre la cual
+se generarán las preguntas. Así como el identificador de la plantilla que quieren utilizar (se
+deja a elección del usuario el dominio de las preguntas).</p>
+</div>
+<div class="paragraph">
+<p>El proceso comienza entonces obteniendo las preguntas definidas en la plantilla elegida por el usuario
+y procesando cada una de ellas.</p>
+</div>
+<div class="paragraph">
+<p>Como se ha expresado anteriormente, hemos asociado cada pregunta con una
+<a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">propiedad</a> de Wikidata.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_generación_del_enunciado">2.2.2. Generación del enunciado</h4>
+<div class="paragraph">
+<p>Primero, el enunciado de la pregunta definido en la _plantilla como:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"¿Dónde fue :entity educado?"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>es transformada en:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"¿Dónde fue Douglas Adams educado?"</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_respuesta_correcta">2.2.3. Respuesta correcta</h4>
+<div class="paragraph">
+<p>Para cada pregunta definida en la plantilla, comenzamos obteniendo la respuesta correcta.
+Esto se consigue haciendo una consulta para obtener el valor de dicha propiedad para la entidad dada.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/correct_answer.svg" alt="Correct answer structure"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_distractores">2.2.4. Distractores</h4>
+<div class="paragraph">
+<p>Para obtener los diferentes distractores seguimos un enfoque similar. Queremos encontrar entidades que
+aparezcan en tripletas como valores de la propiedad que representa la pregunta.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/distractor.svg" alt="Distractor structure"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+El nodo <em>'?'</em> puede ser cualquier entidad excepto la entidad sobre la que estamos generando las
+preguntas (en dicho caso el valor de la propiedad sería una respuesta correcta).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_metadatos">2.2.5. Metadatos</h4>
+<div class="paragraph">
+<p>Información adicional es añadida por último tanto a la respuesta correcta como a los distractores.
+Esta información incluye una breve descripción, una etiqueta con su nombre en lenguaje natural y una
+imagen representativa (si se encuentra disponible).</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-architecture">3. Arquitectura</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_estructura_general">3.1. Estructura general</h3>
+<div class="paragraph">
+<p>Este diagrama visual muestra una representación simplificada de la arquitectura del programa.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../images/architecture.svg" alt="Program Architecture"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_edpoint_controllers">3.2. Edpoint Controllers</h3>
+<div class="paragraph">
+<p>Responsables de gestionar las peticiones HTTP. Expone diferentes <em>endpoints</em> descritos en la seccion <em>API Endpoints</em>.</p>
+</div>
+<div class="paragraph">
+<p>Se comunica de forma directa tanto con el módulo <em>Search</em> como con <em>Question Generator</em> para que lleven
+a cabo la funcionalidad necesaria.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search_module">3.3. Search Module</h3>
+<div class="paragraph">
+<p>Se encarga de realizar la búsqueda de entidades a partir de una etiqueta representativa.
+Esto es, recibe una <em>string</em> y utiliza el módulo <em>Wikidata Local Service</em> para obtener una lista de
+entidades relacionadas.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_questions_generator_module">3.4. Questions Generator Module</h3>
+<div class="paragraph">
+<p>Este módulo contiene la funcionalidad principal de la aplicación. Se encarga del proceso descrito en la
+sección <em>Questions Generation</em>.</p>
+</div>
+<div class="paragraph">
+<p>Se comunica con el módulo <em>Categories</em> para obtener la <em>plantilla</em> elegida por el usuario.</p>
+</div>
+<div class="paragraph">
+<p>Para recopilar toda la información necesaria para componer las preguntas, hace uso de la funcionalidad
+implementada en el módulo <em>Wikidata Local Service</em>, que se conecta direntamente al grafo de conocimiento
+de Wikidata.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_categories_module">3.5. Categories Module</h3>
+<div class="paragraph">
+<p>Gestiona las diferentes <em>plantillas</em> disponibles y se las proporciona al módulo  <em>Questions Generator</em>
+para que genere las preguntas.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wikidata_local_service_module">3.6. Wikidata Local Service Module</h3>
+<div class="paragraph">
+<p>Es el responsable de gestionar la comunicación con la API de Wikidata.</p>
+</div>
+<div class="paragraph">
+<p>Proporciona diferentes consultas y funciones a los módulos superiores para conseguir la información que
+necesitan.</p>
+</div>
+<div class="paragraph">
+<p>Este módulo está altamente acoplado a la implementación de la API de Wikidata. Cualquier cambio en la
+especificación de dicha API podría significar tener que adaptar este módulo a dichos cambios.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-api-endpoints">4. API Endpoints</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_buscar_por_etiqueta">4.1. Buscar por etiqueta</h3>
+<div class="paragraph">
+<p>Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/search/entities.json</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parámetros">4.1.1. Parámetros</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Requerido</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+<th class="tableblock halign-left valign-top">Valor por defecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">requerido</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String utilizada para buscar las entidades.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generar_preguntas">4.2. Generar preguntas</h3>
+<div class="paragraph">
+<p>Devuelve un archivo json conteniendo las preguntas generadas para la entidad y categoría (<em>plantilla</em>)
+dadas.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/generate/questions.json</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parameters">4.2.1. Parameters</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Requerido</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+<th class="tableblock halign-left valign-top">Valor por defecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">entity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">requerido</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identificador asociado a la entidad sobre la que se realizarán las preguntas.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">category</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">requerido</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identificador asociado a la plantilla que se utilizará para generar las preguntas.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-future-improvements">5. Futuras mejoras</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>El modelo de <em>plantillas</em> que utiliza el programa tiene algunas limitaciones.</p>
+</div>
+<div class="paragraph">
+<p>Requiere que el usuario conozca las diferentes plantillas disponibles (potencialmente podría haber un
+elevado número de ellas).</p>
+</div>
+<div class="paragraph">
+<p>Además, tampoco es fácil de mantener por los propios desarrolladores. Nuevas propiedades, dominios o
+soporte de nuevos idiomas podrían aparecer, lo que requeriría definir nuevos templates o redefinir los
+existentes.</p>
+</div>
+<div class="paragraph">
+<p>Sin embargo, abandonar la estrategia actual requeriría afrontar ciertos puntos.</p>
+</div>
+<div class="sect2">
+<h3 id="_selección_de_propiedades">5.1. Selección de propiedades</h3>
+<div class="paragraph">
+<p>Algunas entidades no tienen un valor definido para ciertas propiedades.</p>
+</div>
+<div class="paragraph">
+<p>El programa debería inferir el tipo de la entidad y, automáticamente elegir propiedades relevantes
+para generar preguntas sobre dicha entidad basadas en el contexto.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generación_en_lenguaje_natural">5.2. Generación en lenguaje natural</h3>
+<div class="paragraph">
+<p>El programa debería ser capaz de generar preguntas en lenguaje natural de forma automática a partir de
+propiedades de Wikidata.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-bibliography">6. Bibliografía</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_wikidata_2">6.1. Wikidata</h3>
+<div class="sect3">
+<h4 id="_wikidata_api">6.1.1. Wikidata API</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -466,7 +936,7 @@ from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sparql">SPARQL</h4>
+<h4 id="_sparql">6.1.2. SPARQL</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -477,7 +947,7 @@ from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value
 </div>
 </div>
 <div class="sect2">
-<h3 id="_python">Python</h3>
+<h3 id="_python">6.2. Python</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -501,7 +971,7 @@ from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-29 12:53:26 +0100
+Last updated 2020-01-19 17:00:56 +0100
 </div>
 </div>
 </body>

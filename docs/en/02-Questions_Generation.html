@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Bibliografía</title>
+<title>Questions generation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,59 +441,167 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="section-bibliography">Bibliografía</h2>
+<h2 id="section-questions-generation">Questions generation</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_wikidata">Wikidata</h3>
-<div class="sect3">
-<h4 id="_wikidata_api">Wikidata API</h4>
+<div class="paragraph">
+<p>Our goal is to compose questions about an entity.
+We can form questions about an entitiy by asking for the value of its properties.</p>
+</div>
+<div class="paragraph">
+<p>For instance, in the
+previous example, if we were given the identifier 'Q42' representing the entity
+'Douglas Adams'  as the input for the program,
+a possible output of a question could be: 'Where was Douglas Adams educated?', and a correct answer
+would be 'St. John&#8217;s College'.</p>
+</div>
+<div class="paragraph">
+<p>This approach comes with a few problems:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://qwikidata.readthedocs.io/en/stable/readme.html">Qwikidata</a></p>
+<p>There are thousands of properties and not all of them are equally interesting.</p>
 </li>
 <li>
-<p><a href="https://wikidata.readthedocs.io/en/stable/index.html">Wikidata client library for Python</a></p>
-</li>
-<li>
-<p><a href="https://www.wikidata.org/wiki/Wikidata:Tools/For_programmers">Wikidata tools for programmers</a></p>
-</li>
-<li>
-<p><a href="https://www.wikidata.org/w/api.php?action=help&amp;modules=wbsearchentities">Wikidata API - Search by label</a>
-from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value-from-name">Stack Overflow</a></p>
+<p>Transforming a Wikidata property into a question expressed in natural language is not trivial.</p>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sparql">SPARQL</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://janakiev.com/blog/wikidata-mayors/">Sparql queries examples</a></p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_python">Python</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://requests.kennethreitz.org/en/master/">Python Requests (http requests)</a></p>
-</li>
-<li>
-<p><a href="https://stackoverflow.com/questions/2349991/how-to-import-other-python-files">Python imports</a>.</p>
-</li>
-<li>
-<p><a href="https://medium.com/@onejohi/building-a-simple-rest-api-with-python-and-flask-b404371dc699">Flask tutorial</a> and
-<a href="https://www.youtube.com/watch?v=PTZiDnuC86g">another</a>.</p>
-</li>
-<li>
-<p><a href="https://medium.com/better-programming/lambda-map-and-filter-in-python-4935f248593">Lambda map and filter</a></p>
-</li>
-</ul>
+<h3 id="_templates">Templates</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Available templates</div>
+<a href="Templates.html">Here</a> you can find a list with all the available templates.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A workaround to the problems stated above can be defining <em>templates</em>.</p>
+</div>
+<div class="paragraph">
+<p>Wikidata structures properties by <a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">categories</a>.
+Adopting a similar approach we have defined <em>templates</em>, that is, groups of properties that are related and have a minimum relevance for
+making questions about them.</p>
+</div>
+<div class="paragraph">
+<p>A <em>template</em> also links each property with its expression as a question in natural language.</p>
+</div>
+<div class="paragraph">
+<p>Using the same example as before, a possible <em>template</em> of questions applicable for
+'Douglas Adams' could be
+<em>'People'</em>. This template would contain properties that are more likely to appear when the entity is
+a person. A very simple version of <em>'People'</em> could be:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{
+    "P69" : {
+        "en": "Where was :entity educated?",
+        "es": "¿Dónde fue educado :entity?"
+    },
+    "P27" : {
+        "en": "Which is the country of citizenship of :entity?",
+        "es": "¿De qué país es :entity ciudadano?"
+    }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This template would define enough information to generate up to two questions about an entity, in
+English or Spanish. The keys <a href="https://www.wikidata.org/wiki/Property:P69">"P69"</a> and
+<a href="https://www.wikidata.org/wiki/Property:P27">"P27"</a> correspond directly to the Wikidata identifier of
+those properties.</p>
+</div>
+<div class="paragraph">
+<p>As it can be seen, using <em>templates</em> we have managed to solve both problems.
+Only relevant properties to the domain chosen by the user will be used for
+generating the questions, and the application provides well-formed questions expressed in natural
+language.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generation_process">Generation Process</h3>
+<div class="sect3">
+<h4 id="_user_input">User input</h4>
+<div class="paragraph">
+<p>The user must give as input the identifier
+that represents the entity to generate questions about, as well as the identifier of the
+<a href="Templates.html">template that they want to use</a>.</p>
+</div>
+<div class="paragraph">
+<p>The process starts then by retrieving the questions defined inside the chosen template and
+processing each of them.</p>
+</div>
+<div class="paragraph">
+<p>Remember that each question is associated with a
+<a href="https://www.wikidata.org/wiki/Wikidata:List_of_properties/en">property</a> of Wikidata.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_completion_of_the_statement">Completion of the statement</h4>
+<div class="paragraph">
+<p>First, the question defined in the <em>template</em> as:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"Where was :entity educated?"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>is transformed into:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>"Where was Adam Douglas educated?"</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_correct_answer">Correct answer</h4>
+<div class="paragraph">
+<p>For each question defined in the template, we first obtain the correct answer.
+This is done by querying the value of the property for the given entity.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="correct_answer.svg" alt="Correct answer structure"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_distractors">Distractors</h4>
+<div class="paragraph">
+<p>For obtaining the distractors we follow a similar approach. We want to find entities that appear
+in triples as values of the property that represents the question.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="distractor.svg" alt="Distractor structure"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The node <em>'?'</em> can be any entity except the entity that we are generating questions about (this would mean that the value of the property is a correct answer).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_metadata">Metadata</h4>
+<div class="paragraph">
+<p>Additional information is also added to both the correct answer and the distractors.
+This information includes a short description, a label in natural language with the name of the entity and
+a representative image (if available).</p>
+</div>
 </div>
 </div>
 </div>
@@ -501,7 +609,7 @@ from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-29 12:53:26 +0100
+Last updated 2020-01-21 12:11:19 +0100
 </div>
 </div>
 </body>

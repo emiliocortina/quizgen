@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Bibliografía</title>
+<title>Introduction and Goals</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,59 +441,52 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="section-bibliography">Bibliografía</h2>
+<h2 id="section-introduction-and-goals">Introduction and Goals</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_wikidata">Wikidata</h3>
-<div class="sect3">
-<h4 id="_wikidata_api">Wikidata API</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://qwikidata.readthedocs.io/en/stable/readme.html">Qwikidata</a></p>
-</li>
-<li>
-<p><a href="https://wikidata.readthedocs.io/en/stable/index.html">Wikidata client library for Python</a></p>
-</li>
-<li>
-<p><a href="https://www.wikidata.org/wiki/Wikidata:Tools/For_programmers">Wikidata tools for programmers</a></p>
-</li>
-<li>
-<p><a href="https://www.wikidata.org/w/api.php?action=help&amp;modules=wbsearchentities">Wikidata API - Search by label</a>
-from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value-from-name">Stack Overflow</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_sparql">SPARQL</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://janakiev.com/blog/wikidata-mayors/">Sparql queries examples</a></p>
-</li>
-</ul>
-</div>
+<h3 id="_project_overview">Project Overview</h3>
+<div class="paragraph">
+<p>The project consists on a REST API that shall provide basic functionality to generate multiple choice questions, using
+Wikidata&#8217;s knowledge graph as the source of information.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_python">Python</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://requests.kennethreitz.org/en/master/">Python Requests (http requests)</a></p>
-</li>
-<li>
-<p><a href="https://stackoverflow.com/questions/2349991/how-to-import-other-python-files">Python imports</a>.</p>
-</li>
-<li>
-<p><a href="https://medium.com/@onejohi/building-a-simple-rest-api-with-python-and-flask-b404371dc699">Flask tutorial</a> and
-<a href="https://www.youtube.com/watch?v=PTZiDnuC86g">another</a>.</p>
-</li>
-<li>
-<p><a href="https://medium.com/better-programming/lambda-map-and-filter-in-python-4935f248593">Lambda map and filter</a></p>
-</li>
-</ul>
+<h3 id="_linked_data">Linked data</h3>
+<div class="paragraph">
+<p>Linked Data is structured data which is interlinked with other data. Linked Data can be expressed as semantic triples,
+or simply triple. As its name indicates, a triple is a set of three entities that codifies a statement about semantic
+data in the form of subject–predicate–object expressions (e.g. "Bob is 35", or "Bob knows John").</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="triple.svg" alt="Semantic Triple"></span></p>
+</div>
+<div class="paragraph">
+<p>These links result in knowledge graphs of entities and
+the relationships between them.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="graph.svg" alt="Graph with several entities"></span></p>
+</div>
+<div class="paragraph">
+<p>Part of the vision of linked data is for the Internet to become a global database. This is specially useful for our
+purpose, as it allows us to retrieve data dynamically from any domain.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wikidata">Wikidata</h3>
+<div class="paragraph">
+<p>Wikidata is a knowledge base similar to Wikipedia, but it structures its content as linked data.</p>
+</div>
+<div class="paragraph">
+<p>It uses a few more elements than the ones explained in the previous section.
+Below you can find an example with the most relevant terms used in Wikidata.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="Datamodel_in_Wikidata.svg" alt="Datamodel in Wikidata"></span></p>
+</div>
+<div class="paragraph">
+<p>Wikidata exposes a public <a href="https://www.wikidata.org/wiki/Wikidata:Data_access">API</a> that we use to query
+against its data set using the semantic query language <a href="https://en.wikipedia.org/wiki/SPARQL">SPARQL</a>.</p>
 </div>
 </div>
 </div>
@@ -501,7 +494,7 @@ from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-29 12:53:26 +0100
+Last updated 2020-01-21 12:11:19 +0100
 </div>
 </div>
 </body>

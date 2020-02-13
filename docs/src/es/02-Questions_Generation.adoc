@@ -1,0 +1,103 @@
+[[section-questions-generation]]
+== Generación de preguntas
+
+Nuestro objetivo es componer preguntas sobre una entidad.
+Podemos formular preguntas sobre una entidad preguntando sobre el valor de sus propiedades.
+
+Por ejemplo, en el ejemplo anterior, si obtuviéramos como entrada el identificador ‘Q42’ que
+representa la entidad ‘Douglas Adams’, una posible salida sería una pregunta como:
+‘¿Dónde fue educado Douglas Adams?’. Una respuesta correcta a esta pregunta sería ‘St. John’s College’.
+
+Este enfoque trae consigo varios problemas:
+
+* Hay miles de propiedades y no todas ellas poseen la misma relevancia.
+* Transformar una propiedad de Wikidata en el enunciado de una pregunta en lenguaje natural no es una tarea trivial.
+
+=== Templates
+
+Se puede llegar a una posible solución a los problemas anteriores definiendo _plantillas_.
+
+Wikidata clasifica sus propiedades en https://www.wikidata.org/wiki/Wikidata:List_of_properties/en[categorías].
+Adoptando un enfoque similar,
+hemos decidido definir _plantillas_. Una _plantilla_ es un grupo de propiedades conceptualmente
+relacionadas y que tienen cierta relevancia para ser utilizadas en la generación de preguntas.
+
+A workaround to the problems stated above can be defining _templates_.
+
+Una _plantilla_ también asocia cada propiedad definida en dicha plantilla con su enunciado como pregunta
+en lenguaje natural.
+
+Utilizando el mismo ejemplo que anteriormente, una posible plantilla de preguntas que se podría aplicar
+para la entidad 'Douglas Adams' podría ser _'Personas'_. Esta plantilla contendría propiedades
+que aparecen de manera más frecuente cuando la entidad sobre la que se están generando las preguntas
+es una persona. Una versión simplificada de la plantilla _'Personas'_ podría ser:
+
+    {
+        "P69" : {
+            "en": "Where was :entity educated?",
+            "es": "¿Dónde fue educado :entity?"
+        },
+        "P27" : {
+            "en": "Which is the country of citizenship of :entity?",
+            "es": "¿De qué país es :entity ciudadano?"
+        }
+    }
+
+Esta plantilla definiría suficiente información para generar hasta dos preguntas sobre una entidad,
+en Inglés o Españos. Las _keys_ https://www.wikidata.org/wiki/Property:P69["P69"] and
+https://www.wikidata.org/wiki/Property:P27["P27"] se corresponden directamente con los identificadores
+de dichas propiedades en Wikidata.
+
+Como se puede observar, utilizando _plantillas_ hemos conseguido solucionar ambos problemas.
+Solo aquellas propiedades que sean relevantes para el dominio elegido por el usuario serán utilzadas
+para la realización de preguntas. Así mismo,la aplicación solo proporcionará como salida
+preguntas bien formuladas en lenguaje natural.
+
+
+=== Proceso de generación
+
+==== Entrada del usuario
+
+El usuario debe proporcionar como entrada el identificador que representa la entidad sobre la cual
+se generarán las preguntas. Así como el identificador de la plantilla que quieren utilizar (se
+deja a elección del usuario el dominio de las preguntas).
+
+El proceso comienza entonces obteniendo las preguntas definidas en la plantilla elegida por el usuario
+y procesando cada una de ellas.
+
+Como se ha expresado anteriormente, hemos asociado cada pregunta con una
+https://www.wikidata.org/wiki/Wikidata:List_of_properties/en[propiedad] de Wikidata.
+
+
+==== Generación del enunciado
+
+Primero, el enunciado de la pregunta definido en la _plantilla como:
+
+    "¿Dónde fue :entity educado?"
+
+es transformada en:
+
+    "¿Dónde fue Douglas Adams educado?"
+
+==== Respuesta correcta
+
+Para cada pregunta definida en la plantilla, comenzamos obteniendo la respuesta correcta.
+Esto se consigue haciendo una consulta para obtener el valor de dicha propiedad para la entidad dada.
+
+image:correct_answer.svg[alt=Correct answer structure]
+
+==== Distractores
+
+Para obtener los diferentes distractores seguimos un enfoque similar. Queremos encontrar entidades que
+aparezcan en tripletas como valores de la propiedad que representa la pregunta.
+
+image:distractor.svg[alt=Distractor structure]
+
+NOTE: El nodo _'?'_ puede ser cualquier entidad excepto la entidad sobre la que estamos generando las
+preguntas (en dicho caso el valor de la propiedad sería una respuesta correcta).
+
+==== Metadatos
+
+Información adicional es añadida por último tanto a la respuesta correcta como a los distractores.
+Esta información incluye una breve descripción, una etiqueta con su nombre en lenguaje natural y una
+imagen representativa (si se encuentra disponible).
