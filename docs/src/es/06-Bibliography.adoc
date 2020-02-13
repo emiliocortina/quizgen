@@ -3,6 +3,42 @@
 
 === Wikidata
 
+==== Questions generation
+
+* https://hal.inria.fr/hal-01758737/document[
+Oscar Rodríguez Rocha, Catherine Faron Zucker. Automatic Generation of Quizzes
+from DBpedia According to Educational Standards. The 3rd Educational Knowledge
+Management Workshop (EKM 2018), Apr 2018, Lyon, France. hal-01758737]:
+Orientado a escuelas. Utiliza ontologias orientadas a escuelas y en frances (Eduprogression y
+Les Incollables Knowledge base).
+Utiliza 5 estrategias de generación de preguntas (5 tipos de preguntas diferentes):
+
+
+
+* https://arxiv.org/pdf/1610.09935.pdf[
+Knowledge Questions from Knowledge Graphs, 2016
+]:
+Muy parecido a lo nuestro, utiliza DBPedia y hace distincion entre diferentes tipos de predicados al verbalizar.
+También evalua la dificultad de las preguntas
+
+* https://www.researchgate.net/publication/290168699_Semantic_Multiple-Choice_Question_Generation_and_Concept-Based_Assessment[
+Jelenkovic, Filip & Tosic, Milorad. (2013). Semantic Multiple-Choice Question Generation and Concept-Based Assessment.
+]
+Utiliza proximidad entre las entidades en una jerarquia para determinar la dificultad de los
+distractores.
+Además, para variar la dificultad también utiliza entidades que per se no se encuentran
+en ninguna relacion de ese estilo (una pelicula como respuesta al predicado 'main body of water').
+'We can target specific level of knowledge that we want to test'.
+Requiere una amplia configuración y no eliges la entidad de las preguntas, tan solo el dominio.
+No puedes decir quiero preguntas sobre madrid, deberías decir quiero preguntas sobre geografia (maneja ontologias )
+Las preguntas son del tipo: Which one of the following response pairs relate in the
+same x and y in the relationship p?
+
+
+* https://pdfs.semanticscholar.org/9892/cd189392c491867d5e6d22dcbe02d1019923.pdf?_ga=2.92284765.1186641614.1581606972-442700545.1581606972[
+2008, igual un poco viejo]
+
+
 ==== Wikidata API
 * https://qwikidata.readthedocs.io/en/stable/readme.html[Qwikidata]
 * https://wikidata.readthedocs.io/en/stable/index.html[Wikidata client library for Python]

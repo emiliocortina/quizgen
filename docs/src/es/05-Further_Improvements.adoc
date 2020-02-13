@@ -24,3 +24,9 @@ para generar preguntas sobre dicha entidad basadas en el contexto.
 
 El programa debería ser capaz de generar preguntas en lenguaje natural de forma automática a partir de
 propiedades de Wikidata.
+
+
+=== Dificultad progresiva
+
+El sistema debería tener en cuenta el conocimiento del dominio por parte del usuario, para,
+de esta manera, componer

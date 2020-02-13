@@ -13,6 +13,8 @@ respuestas, la arquitectura del proyecto software, la descripción de los ‘end
 API y, por último, futuros caminos de mejoras para continuar el proyecto.
 
 
+=== Estado del arte
+
 === Linked data
 
 Linked Data son datos estructurados que están interconectados con otros datos.
