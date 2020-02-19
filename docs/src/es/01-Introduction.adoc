@@ -15,6 +15,28 @@ API y, por último, futuros caminos de mejoras para continuar el proyecto.
 
 === Estado del arte
 
+Para la realización del proyecto se ha llevado a cabo un proceso de investigación, acerca de cómo se ha
+abordado esta tarea en otras situaciones.
+
+Se trataran
+
+<<lyon_2018>>: Orientado a escuelas. Utiliza ontologias orientadas a escuelas y en frances (Eduprogression y
+Les Incollables Knowledge base).
+Utiliza 5 estrategias de generación de preguntas (5 tipos de preguntas diferentes)
+
+<<kg_2017>>: Muy parecido a lo nuestro, utiliza DBPedia y hace distincion entre diferentes tipos de predicados al verbalizar.
+También evalua la dificultad de las preguntas
+
+<<semantic_2015>>: Utiliza proximidad entre las entidades en una jerarquia para determinar la dificultad de los
+distractores.
+Además, para variar la dificultad también utiliza entidades que per se no se encuentran
+en ninguna relacion de ese estilo (una pelicula como respuesta al predicado 'main body of water').
+'We can target specific level of knowledge that we want to test'.
+Requiere una amplia configuración y no eliges la entidad de las preguntas, tan solo el dominio.
+No puedes decir quiero preguntas sobre madrid, deberías decir quiero preguntas sobre geografia (maneja ontologias )
+Las preguntas son del tipo: Which one of the following response pairs relate in the
+same x and y in the relationship p?
+
 === Linked data
 
 Linked Data son datos estructurados que están interconectados con otros datos.

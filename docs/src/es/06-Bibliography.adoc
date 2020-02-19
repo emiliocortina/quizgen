@@ -1,43 +1,33 @@
 [[section-bibliography]]
+
 == Bibliografía
 
-=== Wikidata
+[bibliography]
+=== Referencias
 
-==== Questions generation
+-  [[[lyon_2018, 1]]] RODRÍGUEZ ROCHA, Oscar; FARON ZUCKER, Catherine.
+Automatic generation of quizzes from DBpedia according to educational standards.
+En Companion Proceedings of the The Web Conference 2018. 2018. p. 1035-1041.
+MLA. https://hal.inria.fr/hal-01758737/document
 
-* https://hal.inria.fr/hal-01758737/document[
-Oscar Rodríguez Rocha, Catherine Faron Zucker. Automatic Generation of Quizzes
-from DBpedia According to Educational Standards. The 3rd Educational Knowledge
-Management Workshop (EKM 2018), Apr 2018, Lyon, France. hal-01758737]:
-Orientado a escuelas. Utiliza ontologias orientadas a escuelas y en frances (Eduprogression y
-Les Incollables Knowledge base).
-Utiliza 5 estrategias de generación de preguntas (5 tipos de preguntas diferentes):
+- [[[kg_2017, 2]]] SEYLER, Dominic; YAHYA, Mohamed; BERBERICH, Klaus. Knowledge questions from knowledge graphs.
+En Proceedings of the ACM SIGIR International Conference on Theory of Information Retrieval. 2017. p. 11-18.
+https://arxiv.org/pdf/1610.09935.pdf
 
+- [[[semantic_2015,3]]] JELENKOVI, FILIP; TOŠI, MILORAD. CHAPTER TWENTY-EIGHT SEMANTIC MULTIPLE-CHOICE
+QUESTION GENERATION AND CONCEPT-BASED ASSESSMENT FILIP JELENKOVIû AND MILORAD TOŠIû.
+Vistas of English for Specific Purposes, 2015, p. 325.
+MLA
+https://www.researchgate.net/publication/290168699_Semantic_Multiple-Choice_Question_Generation_and_Concept-Based_Assessment
 
-
-* https://arxiv.org/pdf/1610.09935.pdf[
-Knowledge Questions from Knowledge Graphs, 2016
-]:
-Muy parecido a lo nuestro, utiliza DBPedia y hace distincion entre diferentes tipos de predicados al verbalizar.
-También evalua la dificultad de las preguntas
-
-* https://www.researchgate.net/publication/290168699_Semantic_Multiple-Choice_Question_Generation_and_Concept-Based_Assessment[
-Jelenkovic, Filip & Tosic, Milorad. (2013). Semantic Multiple-Choice Question Generation and Concept-Based Assessment.
-]
-Utiliza proximidad entre las entidades en una jerarquia para determinar la dificultad de los
-distractores.
-Además, para variar la dificultad también utiliza entidades que per se no se encuentran
-en ninguna relacion de ese estilo (una pelicula como respuesta al predicado 'main body of water').
-'We can target specific level of knowledge that we want to test'.
-Requiere una amplia configuración y no eliges la entidad de las preguntas, tan solo el dominio.
-No puedes decir quiero preguntas sobre madrid, deberías decir quiero preguntas sobre geografia (maneja ontologias )
-Las preguntas son del tipo: Which one of the following response pairs relate in the
-same x and y in the relationship p?
+- [[[viejo_2008, 4]]] PAPASALOUROS, Andreas; KANARIS, Konstantinos; KOTIS, Konstantinos.
+Automatic Generation Of Multiple Choice Questions From Domain Ontologies.
+En e-Learning. 2008. p. 427-434.
+MLA
+https://pdfs.semanticscholar.org/9892/cd189392c491867d5e6d22dcbe02d1019923.pdf?_ga=2.92284765.1186641614.1581606972-442700545.1581606972
 
 
-* https://pdfs.semanticscholar.org/9892/cd189392c491867d5e6d22dcbe02d1019923.pdf?_ga=2.92284765.1186641614.1581606972-442700545.1581606972[
-2008, igual un poco viejo]
-
+=== Enlaces adicionales
 
 ==== Wikidata API
 * https://qwikidata.readthedocs.io/en/stable/readme.html[Qwikidata]
@@ -49,7 +39,7 @@ from https://stackoverflow.com/questions/27452656/wikidata-entity-value-from-nam
 ==== SPARQL
 * https://janakiev.com/blog/wikidata-mayors/[Sparql queries examples]
 
-=== Python
+==== Python
 * https://requests.kennethreitz.org/en/master/[Python Requests (http requests)]
 * https://stackoverflow.com/questions/2349991/how-to-import-other-python-files[Python imports].
 * https://medium.com/@onejohi/building-a-simple-rest-api-with-python-and-flask-b404371dc699[Flask tutorial] and

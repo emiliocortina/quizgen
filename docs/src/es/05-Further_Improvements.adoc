@@ -30,3 +30,4 @@ propiedades de Wikidata.
 
 El sistema debería tener en cuenta el conocimiento del dominio por parte del usuario, para,
 de esta manera, componer
+
