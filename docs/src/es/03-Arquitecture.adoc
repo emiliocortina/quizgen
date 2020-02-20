@@ -7,7 +7,16 @@ Este diagrama visual muestra una representación simplificada de la arquitectura
 
 image:architecture.svg[alt=Program Architecture]
 
-=== Edpoint Controllers
+
+=== Módulos
+
+.Diagrama de clases de los diferentes módulos del sistema.
+image:modules-classes.svg[alt=Modules]
+
+En la sección <<section-architecture-data-types>> se pueden ver en detalle los tipos de datos a los que hace
+referencia el diagrama anterior.
+
+==== Edpoint Controllers
 
 Responsables de gestionar las peticiones HTTP. Expone diferentes _endpoints_ descritos en la seccion _API Endpoints_.
 
@@ -15,13 +24,13 @@ Se comunica de forma directa tanto con el módulo _Search_ como con _Question Ge
 a cabo la funcionalidad necesaria.
 
 
-=== Search Module
+==== Search Module
 
 Se encarga de realizar la búsqueda de entidades a partir de una etiqueta representativa.
 Esto es, recibe una _string_ y utiliza el módulo _Wikidata Local Service_ para obtener una lista de
 entidades relacionadas.
 
-=== Questions Generator Module
+==== Questions Generator Module
 
 Este módulo contiene la funcionalidad principal de la aplicación. Se encarga del proceso descrito en la
 sección _Questions Generation_.
@@ -32,12 +41,12 @@ Para recopilar toda la información necesaria para componer las preguntas, hace 
 implementada en el módulo _Wikidata Local Service_, que se conecta direntamente al grafo de conocimiento
 de Wikidata.
 
-=== Categories Module
+==== Categories Module
 
 Gestiona las diferentes _plantillas_ disponibles y se las proporciona al módulo  _Questions Generator_
 para que genere las preguntas.
 
-=== Wikidata Local Service Module
+==== Wikidata Local Service Module
 
 Es el responsable de gestionar la comunicación con la API de Wikidata.
 
@@ -46,3 +55,10 @@ necesitan.
 
 Este módulo está altamente acoplado a la implementación de la API de Wikidata. Cualquier cambio en la
 especificación de dicha API podría significar tener que adaptar este módulo a dichos cambios.
+
+
+[[section-architecture-data-types]]
+=== Tipos de datos
+
+.Diagrama de clases de los diferentes tipos de datos
+image:types-classes.svg[alt=Data types]

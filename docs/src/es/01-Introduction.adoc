@@ -1,7 +1,6 @@
 [[section-introduction-and-goals]]
 == Introducción y objetivos
 
-
 === Visión general
 El proyecto consiste en una API REST que proporciona la funcionalidad necesaria para generar preguntas
 ‘tipo test’, esto es, preguntas con múltiples opciones para elegir como respuesta.
