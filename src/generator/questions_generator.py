@@ -1,6 +1,6 @@
 from src.wikidata import wikidata_service as Wikidata
 from requests.exceptions import ReadTimeout
-from src.categories.manager import get_category_questions
+from src.categories.categories_manager import get_category_questions
 
 
 def generate_questions(entity_id, questions_category, questions_limit=None, locale="en"):
@@ -52,7 +52,7 @@ def generate_question(entity_id, property_id, statement, locale):
         # Obtaining the distractors
         distractors = get_distractors(entity_id, property_id)
         # Composing the question object
-        question = {'statement': statement, 'correct_answer': correct_answer, 'distractors': distractors}
+        question = {'statement': statement, 'correctAnswer': correct_answer, 'distractors': distractors}
         return question
     except IndexError:
         print('Data not found for given property and entity')

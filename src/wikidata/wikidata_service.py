@@ -6,12 +6,13 @@ from src.exceptions.invalid_usage import InvalidUsage
 
 correct_answer_query = """
     SELECT
-      ?entity (SAMPLE(?type) AS ?entityType) (SAMPLE(?label) AS  ?entityLabel)
+      ?entity (SAMPLE(?description) AS ?entityDescription) (SAMPLE(?label) AS  ?entityLabel)
     WHERE {
       wd:%s wdt:%s ?entity.
       ?entity rdfs:label ?label . 
-      OPTIONAL {?entity wdt:P31 ?type.}
-      FILTER (langMatches( lang(?label), "en" ) )
+      OPTIONAL {?entity schema:description ?description.}
+      FILTER (langMatches( lang(?label), "en" ))
+      FILTER (langMatches( lang(?description), "en" ))
       SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
     }
     GROUP BY ?entity
@@ -98,7 +99,10 @@ def add_additional_info(entity):
     entity_id = entity['entity']['value'].split('/')[-1]
     query = additional_info_query % (entity_id, entity_id)
     additional_info = make_query(query)
-    entity['additionalInfo'] = additional_info
+    if(len(additional_info) > 0):
+        entity['additionalInfo'] = additional_info[0]
+    else:
+        entity['additionalInfo'] = {}
 
 
 def make_query(query):
