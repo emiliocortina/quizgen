@@ -5,22 +5,29 @@
 [bibliography]
 === Referencias
 
--  [[[lyon_2018, 1]]] RODRÍGUEZ ROCHA, Oscar; FARON ZUCKER, Catherine.
+- [[[slides_2018, 1]]]  FAIZAN, Ainuddin; LOHMANN, Steffen.
+Automatic generation of multiple choice questions from slide content using linked data.
+En Proceedings of the 8th International Conference on Web Intelligence, Mining and Semantics. 2018. p. 1-8.
+MLA
+https://dl.acm.org/doi/10.1145/3227609.3227656
+
+-  [[[lyon_2018, 2]]] RODRÍGUEZ ROCHA, Oscar; FARON ZUCKER, Catherine.
 Automatic generation of quizzes from DBpedia according to educational standards.
 En Companion Proceedings of the The Web Conference 2018. 2018. p. 1035-1041.
 MLA. https://hal.inria.fr/hal-01758737/document
 
-- [[[kg_2017, 2]]] SEYLER, Dominic; YAHYA, Mohamed; BERBERICH, Klaus. Knowledge questions from knowledge graphs.
+- [[[kg_2017, 3]]] SEYLER, Dominic; YAHYA, Mohamed; BERBERICH, Klaus. Knowledge questions from knowledge graphs.
 En Proceedings of the ACM SIGIR International Conference on Theory of Information Retrieval. 2017. p. 11-18.
 https://arxiv.org/pdf/1610.09935.pdf
 
-- [[[semantic_2015,3]]] JELENKOVI, FILIP; TOŠI, MILORAD. CHAPTER TWENTY-EIGHT SEMANTIC MULTIPLE-CHOICE
+- [[[semantic_2015, 4]]] JELENKOVI, FILIP; TOŠI, MILORAD. CHAPTER TWENTY-EIGHT SEMANTIC MULTIPLE-CHOICE
 QUESTION GENERATION AND CONCEPT-BASED ASSESSMENT FILIP JELENKOVIû AND MILORAD TOŠIû.
 Vistas of English for Specific Purposes, 2015, p. 325.
 MLA
 https://www.researchgate.net/publication/290168699_Semantic_Multiple-Choice_Question_Generation_and_Concept-Based_Assessment
 
-- [[[viejo_2008, 4]]] PAPASALOUROS, Andreas; KANARIS, Konstantinos; KOTIS, Konstantinos.
+
+- [[[viejo_2008, 5]]] PAPASALOUROS, Andreas; KANARIS, Konstantinos; KOTIS, Konstantinos.
 Automatic Generation Of Multiple Choice Questions From Domain Ontologies.
 En e-Learning. 2008. p. 427-434.
 MLA

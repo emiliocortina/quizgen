@@ -14,27 +14,74 @@ API y, por último, futuros caminos de mejoras para continuar el proyecto.
 
 === Estado del arte
 
-Para la realización del proyecto se ha llevado a cabo un proceso de investigación, acerca de cómo se ha
-abordado esta tarea en otras situaciones.
+Para la realización del proyecto se ha llevado a cabo un proceso de investigación acerca de cómo se ha abordado
+el mismo problema (o similares) en anteriores situaciones.
+A continuación se tratarán varios de los artículos recabados junto con sus ventajas, inconvenientes y similaridades
+con nuestro enfoque.
 
-Se trataran
 
-<<lyon_2018>>: Orientado a escuelas. Utiliza ontologias orientadas a escuelas y en frances (Eduprogression y
+==== Automatic generation of multiple choice questions from slide content using linked data
+Tiene como objetivo extraer preguntas a partir de información que localiza en diapositivas.
+Es decir, a partir de un texto localiza entidades y posibles enunciados que utiliza para
+la generación de preguntas de múltiple opción.
+
+Permite seleccionar diferentes niveles de dificultad, incluyendo preguntas que son difíciles de responder.
+Esto lo consigue utilizando información poco conocida y/o distractores que son semánticamente similares a la
+respuesta correcta.
+
+Tiene tres variedades de preguntas:
+
+* _Gap-fill_: se generan a partir de un enunciado en el que una entidad es
+mencionada, sustituyendo la entidad por un espacio en blanco y proporcionando
+otras entidades similares como distractores.
+
+* _Choose-the-type_: se pregunta por el tipo al que pertenece la entidad.
+Los distractores son similaras al tipo de la entidad.
+
+* _Jeopardy-style_: son preguntas que incluyen algún tipo de pistas sobre
+la respuesta en el enunciado.
+
+Hace uso de DBPedia como fuente de información, y, en cuanto al proceso de verbalizar la información semántica, utiliza un
+enfoque muy similar al que hemos adoptado, basado en plantillas o _templates_.
+<<slides_2018>>
+
+
+==== Automatic generation of quizzes from DBpedia according to educational standards
+Este artículo busca el desarrollo de un sistema predominantemente enfocado a escuelas.
+Utiliza ontologías específicas de este dominio (Eduprogression y
 Les Incollables Knowledge base).
-Utiliza 5 estrategias de generación de preguntas (5 tipos de preguntas diferentes)
 
-<<kg_2017>>: Muy parecido a lo nuestro, utiliza DBPedia y hace distincion entre diferentes tipos de predicados al verbalizar.
-También evalua la dificultad de las preguntas
+Además, al contrario de nuestro proyecto, que solo utiliza una estrategia de generación de preguntas,
+este proyecto emplea 5 estrategias de generación de preguntas para proporcionar 5 tipos de preguntas diferentes.
+<<lyon_2018>>
 
-<<semantic_2015>>: Utiliza proximidad entre las entidades en una jerarquia para determinar la dificultad de los
+
+==== Knowledge questions from knowledge graphs
+Utiliza DBPedia como fuente de información.
+Hace distincion entre diferentes tipos de predicados y,
+al igual que <<slides_2018>> y nuestro propio sistema, utiliza un modelo de plantillas
+para verbalizar los enunciados semánticos.
+
+Este proyecto también es capaz de evaluar la dificultad de las preguntas.<<kg_2017>>.
+
+
+==== Semantic multiple-choice question generation and concept-based assessment
+Este proyecto destaca en el método que utiliza para variar la dificultad de las preguntas.
+Utiliza proximidad entre las entidades en una jerarquía para determinar la dificultad de los
 distractores.
-Además, para variar la dificultad también utiliza entidades que per se no se encuentran
-en ninguna relacion de ese estilo (una pelicula como respuesta al predicado 'main body of water').
-'We can target specific level of knowledge that we want to test'.
-Requiere una amplia configuración y no eliges la entidad de las preguntas, tan solo el dominio.
-No puedes decir quiero preguntas sobre madrid, deberías decir quiero preguntas sobre geografia (maneja ontologias )
-Las preguntas son del tipo: Which one of the following response pairs relate in the
-same x and y in the relationship p?
+Por ejemplo, para hacer una pregunta más fácil puede elegir entidades que no aparecen
+en ninguna relación equivalente (seleccionar una película como distractor de una pregunta
+que pregunta por la capital de un país).
+
+Requiere una amplia configuración de diferentes parámetros y no permite eligir la entidad
+sobre la que se realizarán las preguntas, tan solo el dominio.
+No podrías elegir generar preguntas sobre 'Madrid', sino generar preguntas sobre geografía
+en general.
+
+Además, las preguntas generadas son poco comprensibles en lenguaje natural,
+siendo del tipo: 'Which one of the following response pairs relate in the
+same way as x and y in the relationship p?'
+<<semantic_2015>>
 
 === Linked data
 
