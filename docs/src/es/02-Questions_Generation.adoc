@@ -13,6 +13,7 @@ Este enfoque trae consigo varios problemas:
 * Hay miles de propiedades y no todas ellas poseen la misma relevancia.
 * Transformar una propiedad de Wikidata en el enunciado de una pregunta en lenguaje natural no es una tarea trivial.
 
+[[section-templates]]
 === Templates
 
 Se puede llegar a una posible solución a los problemas anteriores definiendo _plantillas_.
@@ -55,6 +56,9 @@ preguntas bien formuladas en lenguaje natural.
 
 
 === Proceso de generación
+
+.Diagrama de secuencia del proceso de generación de preguntas
+image:sequence-diagram.svg[alt=Diagrama de secuencia]
 
 ==== Entrada del usuario
 

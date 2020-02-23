@@ -1,7 +1,9 @@
+[[section-anex]]
 == Anexo
 
 === Templates disponibles
 
+[[section-anex-templates-companies]]
 ==== Q18608993 (_Companies_)
 
 |===
@@ -34,7 +36,7 @@ Where are %s headquarters located?
 
 |===
 
-
+[[section-anex-templates-geography]]
 ==== Q52511956 (_Geography_)
 
 |===

@@ -3,9 +3,9 @@
 
 === Buscar por etiqueta
 
-Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.
-
     /search/entities.json
+
+Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.
 
 ==== Parámetros
 
@@ -15,13 +15,19 @@ Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entid
 |label |requerido | String utilizada para buscar las entidades. |
 |===
 
+==== Ejemplos
+
+.Búsqueda de entidades a partir de la etiqueta 'Madrid'
+    /search/entities.json?label=Madrid
+
 
 === Generar preguntas
 
-Devuelve un archivo json conteniendo las preguntas generadas para la entidad y categoría (_plantilla_)
-dadas.
-
     /generate/questions.json
+
+Recibe diferentes parámetros y devuelve un archivo json conteniendo las preguntas generadas para
+la entidad y categoría (_plantilla_)
+selecionadas.
 
 ==== Parameters
 
@@ -30,5 +36,12 @@ dadas.
 
 |entity |requerido | Identificador asociado a la entidad sobre la que se realizarán las preguntas. |
 |category |requerido |Identificador asociado a la plantilla que se utilizará para generar las preguntas.|
+|limit |opcional |Número límite de preguntas a generar.| Ninguno, se
+generarán todas las preguntas disponibles en el _template_
 
 |===
+
+==== Ejemplos
+
+.Generación de una (1) pregunta sobre la entidad Q312 (Apple Inc.) utilizando el _template_ <<section-anex-templates-companies>>.
+    /generate/questions.json?entity=Q312&category=Q18608993&limit=1

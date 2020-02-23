@@ -1,7 +1,40 @@
 [[section-bibliography]]
+
 == Bibliografía
 
-=== Wikidata
+[bibliography]
+=== Referencias
+
+- [[[slides_2018, 1]]]  FAIZAN, Ainuddin; LOHMANN, Steffen.
+Automatic generation of multiple choice questions from slide content using linked data.
+En Proceedings of the 8th International Conference on Web Intelligence, Mining and Semantics. 2018. p. 1-8.
+MLA
+https://dl.acm.org/doi/10.1145/3227609.3227656
+
+-  [[[lyon_2018, 2]]] RODRÍGUEZ ROCHA, Oscar; FARON ZUCKER, Catherine.
+Automatic generation of quizzes from DBpedia according to educational standards.
+En Companion Proceedings of the The Web Conference 2018. 2018. p. 1035-1041.
+MLA. https://hal.inria.fr/hal-01758737/document
+
+- [[[kg_2017, 3]]] SEYLER, Dominic; YAHYA, Mohamed; BERBERICH, Klaus. Knowledge questions from knowledge graphs.
+En Proceedings of the ACM SIGIR International Conference on Theory of Information Retrieval. 2017. p. 11-18.
+https://arxiv.org/pdf/1610.09935.pdf
+
+- [[[semantic_2015, 4]]] JELENKOVI, FILIP; TOŠI, MILORAD. CHAPTER TWENTY-EIGHT SEMANTIC MULTIPLE-CHOICE
+QUESTION GENERATION AND CONCEPT-BASED ASSESSMENT FILIP JELENKOVIû AND MILORAD TOŠIû.
+Vistas of English for Specific Purposes, 2015, p. 325.
+MLA
+https://www.researchgate.net/publication/290168699_Semantic_Multiple-Choice_Question_Generation_and_Concept-Based_Assessment
+
+
+- [[[viejo_2008, 5]]] PAPASALOUROS, Andreas; KANARIS, Konstantinos; KOTIS, Konstantinos.
+Automatic Generation Of Multiple Choice Questions From Domain Ontologies.
+En e-Learning. 2008. p. 427-434.
+MLA
+https://pdfs.semanticscholar.org/9892/cd189392c491867d5e6d22dcbe02d1019923.pdf?_ga=2.92284765.1186641614.1581606972-442700545.1581606972
+
+
+=== Enlaces adicionales
 
 ==== Wikidata API
 * https://qwikidata.readthedocs.io/en/stable/readme.html[Qwikidata]
@@ -13,7 +46,7 @@ from https://stackoverflow.com/questions/27452656/wikidata-entity-value-from-nam
 ==== SPARQL
 * https://janakiev.com/blog/wikidata-mayors/[Sparql queries examples]
 
-=== Python
+==== Python
 * https://requests.kennethreitz.org/en/master/[Python Requests (http requests)]
 * https://stackoverflow.com/questions/2349991/how-to-import-other-python-files[Python imports].
 * https://medium.com/@onejohi/building-a-simple-rest-api-with-python-and-flask-b404371dc699[Flask tutorial] and

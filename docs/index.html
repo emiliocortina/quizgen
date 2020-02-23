@@ -445,24 +445,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-introduction-and-goals">1. Introducción y objetivos</a>
 <ul class="sectlevel2">
 <li><a href="#_visión_general">1.1. Visión general</a></li>
-<li><a href="#_linked_data">1.2. Linked data</a></li>
-<li><a href="#_wikidata">1.3. Wikidata</a></li>
+<li><a href="#section-state-of-the-art">1.2. Estado del arte</a></li>
+<li><a href="#_linked_data">1.3. Linked data</a></li>
+<li><a href="#_wikidata">1.4. Wikidata</a></li>
 </ul>
 </li>
 <li><a href="#section-questions-generation">2. Generación de preguntas</a>
 <ul class="sectlevel2">
-<li><a href="#_templates">2.1. Templates</a></li>
+<li><a href="#section-templates">2.1. Templates</a></li>
 <li><a href="#_proceso_de_generación">2.2. Proceso de generación</a></li>
 </ul>
 </li>
 <li><a href="#section-architecture">3. Arquitectura</a>
 <ul class="sectlevel2">
 <li><a href="#_estructura_general">3.1. Estructura general</a></li>
-<li><a href="#_edpoint_controllers">3.2. Edpoint Controllers</a></li>
-<li><a href="#_search_module">3.3. Search Module</a></li>
-<li><a href="#_questions_generator_module">3.4. Questions Generator Module</a></li>
-<li><a href="#_categories_module">3.5. Categories Module</a></li>
-<li><a href="#_wikidata_local_service_module">3.6. Wikidata Local Service Module</a></li>
+<li><a href="#_módulos">3.2. Módulos</a></li>
+<li><a href="#section-architecture-data-types">3.3. Tipos de datos</a></li>
 </ul>
 </li>
 <li><a href="#section-api-endpoints">4. API Endpoints</a>
@@ -475,12 +473,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_selección_de_propiedades">5.1. Selección de propiedades</a></li>
 <li><a href="#_generación_en_lenguaje_natural">5.2. Generación en lenguaje natural</a></li>
+<li><a href="#_dificultad_progresiva">5.3. Dificultad progresiva</a></li>
 </ul>
 </li>
 <li><a href="#section-bibliography">6. Bibliografía</a>
 <ul class="sectlevel2">
-<li><a href="#_wikidata_2">6.1. Wikidata</a></li>
-<li><a href="#_python">6.2. Python</a></li>
+<li><a href="#_referencias">Referencias</a></li>
+<li><a href="#_enlaces_adicionales">6.1. Enlaces adicionales</a></li>
+</ul>
+</li>
+<li><a href="#section-anex">7. Anexo</a>
+<ul class="sectlevel2">
+<li><a href="#_templates_disponibles">7.1. Templates disponibles</a></li>
 </ul>
 </li>
 </ul>
@@ -510,7 +514,102 @@ API y, por último, futuros caminos de mejoras para continuar el proyecto.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_linked_data">1.2. Linked data</h3>
+<h3 id="section-state-of-the-art">1.2. Estado del arte</h3>
+<div class="paragraph">
+<p>Para la realización del proyecto se ha llevado a cabo un proceso de investigación acerca de cómo se ha abordado
+el mismo problema (o similares) en anteriores situaciones.<br>
+A continuación se tratarán varios de los artículos recabados junto con sus ventajas, inconvenientes y similaridades
+con nuestro enfoque.</p>
+</div>
+<div class="sect3">
+<h4 id="_automatic_generation_of_multiple_choice_questions_from_slide_content_using_linked_data">1.2.1. Automatic generation of multiple choice questions from slide content using linked data</h4>
+<div class="paragraph">
+<p>Tiene como objetivo extraer preguntas a partir de información que localiza en diapositivas.<br>
+Es decir, a partir de un texto localiza entidades y posibles enunciados que utiliza para
+la generación de preguntas de múltiple opción.</p>
+</div>
+<div class="paragraph">
+<p>Permite seleccionar diferentes niveles de dificultad, incluyendo preguntas que son difíciles de responder.
+Esto lo consigue utilizando información poco conocida y/o distractores que son semánticamente similares a la
+respuesta correcta.</p>
+</div>
+<div class="paragraph">
+<p>Tiene tres variedades de preguntas:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Gap-fill</em>: se generan a partir de un enunciado en el que una entidad es
+mencionada, sustituyendo la entidad por un espacio en blanco y proporcionando
+otras entidades similares como distractores.</p>
+</li>
+<li>
+<p><em>Choose-the-type</em>: se pregunta por el tipo al que pertenece la entidad.
+Los distractores son similares al tipo de la entidad.</p>
+</li>
+<li>
+<p><em>Jeopardy-style</em>: son preguntas que incluyen algún tipo de pistas sobre
+la respuesta en el enunciado.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Hace uso de DBPedia como fuente de información, y, en cuanto al proceso de verbalizar la información semántica, utiliza un
+enfoque muy similar al que hemos adoptado, basado en plantillas o <em>templates</em>.
+<a href="#slides_2018">[1]</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_automatic_generation_of_quizzes_from_dbpedia_according_to_educational_standards">1.2.2. Automatic generation of quizzes from DBpedia according to educational standards</h4>
+<div class="paragraph">
+<p>Este artículo busca el desarrollo de un sistema predominantemente enfocado a escuelas.
+Utiliza ontologías específicas de este dominio (Eduprogression y
+Les Incollables Knowledge base).</p>
+</div>
+<div class="paragraph">
+<p>Además, al contrario de nuestro proyecto, que solo utiliza una estrategia de generación de preguntas,
+este emplea 5 estrategias de generación de preguntas para proporcionar 5 tipos de preguntas diferentes.
+<a href="#lyon_2018">[2]</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_knowledge_questions_from_knowledge_graphs">1.2.3. Knowledge questions from knowledge graphs</h4>
+<div class="paragraph">
+<p>Utiliza DBPedia como fuente de información.
+Hace distincion entre diferentes tipos de predicados y,
+al igual que <a href="#slides_2018">[1]</a> y nuestro propio sistema, utiliza un modelo de plantillas
+para verbalizar los enunciados semánticos.</p>
+</div>
+<div class="paragraph">
+<p>Este proyecto también es capaz de evaluar la dificultad de las preguntas.<a href="#kg_2017">[3]</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_semantic_multiple_choice_question_generation_and_concept_based_assessment">1.2.4. Semantic multiple-choice question generation and concept-based assessment</h4>
+<div class="paragraph">
+<p>Este sistema destaca en el método que utiliza para variar la dificultad de las preguntas.
+Utiliza proximidad entre las entidades en una jerarquía para determinar la dificultad de los
+distractores.<br>
+Por ejemplo, para hacer una pregunta más fácil puede elegir entidades que no aparecen
+en ninguna relación equivalente (seleccionar una película como distractor de una pregunta
+que pregunta por la capital de un país).</p>
+</div>
+<div class="paragraph">
+<p>Requiere una amplia configuración de diferentes parámetros y no permite eligir la entidad
+sobre la que se realizarán las preguntas, tan solo el dominio.<br>
+<em>No sería posible elegir generar preguntas sobre 'Madrid', sino generar preguntas sobre geografía
+en general.</em></p>
+</div>
+<div class="paragraph">
+<p>Además, las preguntas generadas son poco comprensibles en lenguaje natural,
+siendo del tipo: 'Which one of the following response pairs relate in the
+same way as x and y in the relationship p?'
+<a href="#semantic_2015">[4]</a></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_linked_data">1.3. Linked data</h3>
 <div class="paragraph">
 <p>Linked Data son datos estructurados que están interconectados con otros datos.
 Linked Data puede expresarse como tripletas semánticas, o simplemente tripletas.
@@ -535,7 +634,7 @@ forma dinámica sobre cualquier dominio.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_wikidata">1.3. Wikidata</h3>
+<h3 id="_wikidata">1.4. Wikidata</h3>
 <div class="paragraph">
 <p>Wikidata es una base de conocimiento similar a Wikipedia, sin embargo, estructura su contenido
 codificándolo como Linked Data.</p>
@@ -582,7 +681,7 @@ representa la entidad ‘Douglas Adams’, una posible salida sería una pregunt
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_templates">2.1. Templates</h3>
+<h3 id="section-templates">2.1. Templates</h3>
 <div class="paragraph">
 <p>Se puede llegar a una posible solución a los problemas anteriores definiendo <em>plantillas</em>.</p>
 </div>
@@ -634,6 +733,10 @@ preguntas bien formuladas en lenguaje natural.</p>
 </div>
 <div class="sect2">
 <h3 id="_proceso_de_generación">2.2. Proceso de generación</h3>
+<div class="paragraph">
+<div class="title">Diagrama de secuencia del proceso de generación de preguntas</div>
+<p><span class="image"><img src="./images/sequence-diagram.svg" alt="Diagrama de secuencia"></span></p>
+</div>
 <div class="sect3">
 <h4 id="_entrada_del_usuario">2.2.1. Entrada del usuario</h4>
 <div class="paragraph">
@@ -727,7 +830,17 @@ imagen representativa (si se encuentra disponible).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_edpoint_controllers">3.2. Edpoint Controllers</h3>
+<h3 id="_módulos">3.2. Módulos</h3>
+<div class="paragraph">
+<div class="title">Diagrama de clases de los diferentes módulos del sistema.</div>
+<p><span class="image"><img src="./images/modules-classes.svg" alt="Modules"></span></p>
+</div>
+<div class="paragraph">
+<p>En la sección <a href="#section-architecture-data-types">Tipos de datos</a> se pueden ver en detalle los tipos de datos a los que hace
+referencia el diagrama anterior.</p>
+</div>
+<div class="sect3">
+<h4 id="_edpoint_controllers">3.2.1. Edpoint Controllers</h4>
 <div class="paragraph">
 <p>Responsables de gestionar las peticiones HTTP. Expone diferentes <em>endpoints</em> descritos en la seccion <em>API Endpoints</em>.</p>
 </div>
@@ -736,16 +849,16 @@ imagen representativa (si se encuentra disponible).</p>
 a cabo la funcionalidad necesaria.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_search_module">3.3. Search Module</h3>
+<div class="sect3">
+<h4 id="_search_module">3.2.2. Search Module</h4>
 <div class="paragraph">
 <p>Se encarga de realizar la búsqueda de entidades a partir de una etiqueta representativa.
 Esto es, recibe una <em>string</em> y utiliza el módulo <em>Wikidata Local Service</em> para obtener una lista de
 entidades relacionadas.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_questions_generator_module">3.4. Questions Generator Module</h3>
+<div class="sect3">
+<h4 id="_questions_generator_module">3.2.3. Questions Generator Module</h4>
 <div class="paragraph">
 <p>Este módulo contiene la funcionalidad principal de la aplicación. Se encarga del proceso descrito en la
 sección <em>Questions Generation</em>.</p>
@@ -759,15 +872,15 @@ implementada en el módulo <em>Wikidata Local Service</em>, que se conecta diren
 de Wikidata.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_categories_module">3.5. Categories Module</h3>
+<div class="sect3">
+<h4 id="_categories_module">3.2.4. Categories Module</h4>
 <div class="paragraph">
 <p>Gestiona las diferentes <em>plantillas</em> disponibles y se las proporciona al módulo  <em>Questions Generator</em>
 para que genere las preguntas.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_wikidata_local_service_module">3.6. Wikidata Local Service Module</h3>
+<div class="sect3">
+<h4 id="_wikidata_local_service_module">3.2.5. Wikidata Local Service Module</h4>
 <div class="paragraph">
 <p>Es el responsable de gestionar la comunicación con la API de Wikidata.</p>
 </div>
@@ -779,6 +892,14 @@ necesitan.</p>
 <p>Este módulo está altamente acoplado a la implementación de la API de Wikidata. Cualquier cambio en la
 especificación de dicha API podría significar tener que adaptar este módulo a dichos cambios.</p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="section-architecture-data-types">3.3. Tipos de datos</h3>
+<div class="paragraph">
+<div class="title">Diagrama de clases de los diferentes tipos de datos del sistema.</div>
+<p><span class="image"><img src="./images/types-classes.svg" alt="Data types"></span></p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -788,13 +909,13 @@ especificación de dicha API podría significar tener que adaptar este módulo a
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_buscar_por_etiqueta">4.1. Buscar por etiqueta</h3>
-<div class="paragraph">
-<p>Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.</p>
-</div>
 <div class="literalblock">
 <div class="content">
 <pre>/search/entities.json</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.</p>
 </div>
 <div class="sect3">
 <h4 id="_parámetros">4.1.1. Parámetros</h4>
@@ -823,17 +944,27 @@ especificación de dicha API podría significar tener que adaptar este módulo a
 </tbody>
 </table>
 </div>
+<div class="sect3">
+<h4 id="_ejemplos">4.1.2. Ejemplos</h4>
+<div class="literalblock">
+<div class="title">Búsqueda de entidades a partir de la etiqueta 'Madrid'</div>
+<div class="content">
+<pre>/search/entities.json?label=Madrid</pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_generar_preguntas">4.2. Generar preguntas</h3>
-<div class="paragraph">
-<p>Devuelve un archivo json conteniendo las preguntas generadas para la entidad y categoría (<em>plantilla</em>)
-dadas.</p>
-</div>
 <div class="literalblock">
 <div class="content">
 <pre>/generate/questions.json</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Recibe diferentes parámetros y devuelve un archivo json conteniendo las preguntas generadas para
+la entidad y categoría (<em>plantilla</em>)
+selecionadas.</p>
 </div>
 <div class="sect3">
 <h4 id="_parameters">4.2.1. Parameters</h4>
@@ -865,8 +996,24 @@ dadas.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Identificador asociado a la plantilla que se utilizará para generar las preguntas.</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">opcional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Número límite de preguntas a generar.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ninguno, se
+generarán todas las preguntas disponibles en el <em>template</em></p></td>
+</tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="_ejemplos_2">4.2.2. Ejemplos</h4>
+<div class="literalblock">
+<div class="title">Generación de una (1) pregunta sobre la entidad Q312 (Apple Inc.) utilizando el <em>template</em> <a href="#section-anex-templates-companies">Q18608993 (<em>Companies</em>)</a>.</div>
+<div class="content">
+<pre>/generate/questions.json?entity=Q312&amp;category=Q18608993&amp;limit=1</pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -876,7 +1023,7 @@ dadas.</p>
 <h2 id="section-future-improvements">5. Futuras mejoras</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>El modelo de <em>plantillas</em> que utiliza el programa tiene algunas limitaciones.</p>
+<p>El modelo de plantillas que utiliza el programa tiene algunas limitaciones.</p>
 </div>
 <div class="paragraph">
 <p>Requiere que el usuario conozca las diferentes plantillas disponibles (potencialmente podría haber un
@@ -906,6 +1053,21 @@ para generar preguntas sobre dicha entidad basadas en el contexto.</p>
 <p>El programa debería ser capaz de generar preguntas en lenguaje natural de forma automática a partir de
 propiedades de Wikidata.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_dificultad_progresiva">5.3. Dificultad progresiva</h3>
+<div class="paragraph">
+<p>El sistema debería tener en cuenta el conocimiento del dominio por parte del usuario, para,
+de esta manera, adaptar la dificultad de las preguntas de manera progresiva.</p>
+</div>
+<div class="paragraph">
+<p>Como se ha visto en la sección <a href="#section-state-of-the-art">Estado del arte</a>, una posible técnica para conseguir esto
+sería utilizar el contexto de la entidad.<br>
+Es decir, seleccionar los distractores de las
+preguntas basándose en la ubicación de la entidad que representa la respuesta correcta en el grafo,
+eligiendo distractores que
+sean similares a esta para crear preguntas difíciles y viceversa.</p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -914,7 +1076,46 @@ propiedades de Wikidata.</p>
 <h2 id="section-bibliography">6. Bibliografía</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_wikidata_2">6.1. Wikidata</h3>
+<h3 id="_referencias">Referencias</h3>
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li>
+<p><a id="slides_2018"></a>[1]  FAIZAN, Ainuddin; LOHMANN, Steffen.
+Automatic generation of multiple choice questions from slide content using linked data.
+En Proceedings of the 8th International Conference on Web Intelligence, Mining and Semantics. 2018. p. 1-8.
+MLA
+<a href="https://dl.acm.org/doi/10.1145/3227609.3227656" class="bare">https://dl.acm.org/doi/10.1145/3227609.3227656</a></p>
+</li>
+<li>
+<p><a id="lyon_2018"></a>[2] RODRÍGUEZ ROCHA, Oscar; FARON ZUCKER, Catherine.
+Automatic generation of quizzes from DBpedia according to educational standards.
+En Companion Proceedings of the The Web Conference 2018. 2018. p. 1035-1041.
+MLA. <a href="https://hal.inria.fr/hal-01758737/document" class="bare">https://hal.inria.fr/hal-01758737/document</a></p>
+</li>
+<li>
+<p><a id="kg_2017"></a>[3] SEYLER, Dominic; YAHYA, Mohamed; BERBERICH, Klaus. Knowledge questions from knowledge graphs.
+En Proceedings of the ACM SIGIR International Conference on Theory of Information Retrieval. 2017. p. 11-18.
+<a href="https://arxiv.org/pdf/1610.09935.pdf" class="bare">https://arxiv.org/pdf/1610.09935.pdf</a></p>
+</li>
+<li>
+<p><a id="semantic_2015"></a>[4] JELENKOVI, FILIP; TOŠI, MILORAD. CHAPTER TWENTY-EIGHT SEMANTIC MULTIPLE-CHOICE
+QUESTION GENERATION AND CONCEPT-BASED ASSESSMENT FILIP JELENKOVIû AND MILORAD TOŠIû.
+Vistas of English for Specific Purposes, 2015, p. 325.
+MLA
+<a href="https://www.researchgate.net/publication/290168699_Semantic_Multiple-Choice_Question_Generation_and_Concept-Based_Assessment" class="bare">https://www.researchgate.net/publication/290168699_Semantic_Multiple-Choice_Question_Generation_and_Concept-Based_Assessment</a></p>
+</li>
+<li>
+<p><a id="viejo_2008"></a>[5] PAPASALOUROS, Andreas; KANARIS, Konstantinos; KOTIS, Konstantinos.
+Automatic Generation Of Multiple Choice Questions From Domain Ontologies.
+En e-Learning. 2008. p. 427-434.
+MLA
+<a href="https://pdfs.semanticscholar.org/9892/cd189392c491867d5e6d22dcbe02d1019923.pdf?_ga=2.92284765.1186641614.1581606972-442700545.1581606972" class="bare">https://pdfs.semanticscholar.org/9892/cd189392c491867d5e6d22dcbe02d1019923.pdf?_ga=2.92284765.1186641614.1581606972-442700545.1581606972</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enlaces_adicionales">6.1. Enlaces adicionales</h3>
 <div class="sect3">
 <h4 id="_wikidata_api">6.1.1. Wikidata API</h4>
 <div class="ulist">
@@ -945,9 +1146,8 @@ from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value
 </ul>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_python">6.2. Python</h3>
+<div class="sect3">
+<h4 id="_python">6.1.3. Python</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -965,13 +1165,233 @@ from <a href="https://stackoverflow.com/questions/27452656/wikidata-entity-value
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-anex">7. Anexo</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_templates_disponibles">7.1. Templates disponibles</h3>
+<div class="sect3">
+<h4 id="section-anex-templates-companies">7.1.1. Q18608993 (<em>Companies</em>)</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Propiedad</th>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Enunciado (Español)</th>
+<th class="tableblock halign-left valign-top">Enunciado (Inglés)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P571">P571</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inception</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cúando se fundó %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When was %s founded?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P159">P159</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Headquarters location</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Dónde están las oficinas de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where are %s headquarters located?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P17">P17</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Country</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿En qué país se encuentra %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In which country is %s based?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P154">P154</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es el logo de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which is the logo of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P1454">P1454</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Legal form</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What is %s legal form?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Legal form</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P452">P452</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Industry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es la industria de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which is the industry of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P127">P127</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Owned by</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Quién es el propietario de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who owns %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P414">P414</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stock Exchange</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿En qué mercado cotiza %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In which stock exchange is %s traded?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P740">P740</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location of formation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Dónde se originó %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where was %s created?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P856">P856</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Official website</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which is %s official website?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es el sitio web oficial de %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P1448">P1448</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Official name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es el nombre oficial de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What&#8217;s %s official name?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P1128">P1128</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of employees</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuánta gente trabaja en %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many people work at %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P2403">P2403</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total assets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What&#8217;s the value of assets held by %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es el valor de los activos de %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P2138">P2138</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total liabilities</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es el valor de los pasivos de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What&#8217;s the value of liabilities held by %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P2137">P2137</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total equity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es el valor del capital propio de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What&#8217;s the value of equity of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P2226">P2226</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Market capitalization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es el valor de la capitalización bursátil de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What&#8217;s the total value of issued shares by %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P1830">P1830</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Owner of</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál de las siguientes entidades es propiedad de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which entity is owned by %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P169">P169</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CEO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Quién es el CEO de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who is the CEO of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P1789">P1789</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Quién es el Chief Operating Officer (COO) de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who is the Chief Operating Officer (COO) of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P112">P112</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Founded by</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Quién fundó %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who is the founder of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P1037">P1037</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Director/Manager</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Quién es el director de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who is the director/manager of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P3320">P3320</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Board Member</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Quién es un miembro del consejo de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who is a member of the board of %s?</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="section-anex-templates-geography">7.1.2. Q52511956 (<em>Geography</em>)</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Propiedad</th>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Enunciado (Español)</th>
+<th class="tableblock halign-left valign-top">Enunciado (Inglés)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P30">P30</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Continent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿En qué continente se encuentra %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In which continent is %s located?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P36">P36</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Capital</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cuál es la capital de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which is the capital of %s?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P47">P47</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Border</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%s hace frontera con&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%s shares border with&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P1549">P1549</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Demonym</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Cómo se denominan los habitantes de %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How are the people from %s called?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P17">P17</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Country</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿En qué país se encuentra %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In which country is %s located?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.wikidata.org/wiki/Property:P6">P6</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Head of government</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who is the head of government of %s?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">¿Quién es el jefe de gobierno de %s?</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-19 17:00:56 +0100
+Last updated 2020-02-13 17:55:43 +0100
 </div>
 </div>
 </body>
