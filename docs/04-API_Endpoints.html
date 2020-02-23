@@ -445,13 +445,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_buscar_por_etiqueta">Buscar por etiqueta</h3>
-<div class="paragraph">
-<p>Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.</p>
-</div>
 <div class="literalblock">
 <div class="content">
 <pre>/search/entities.json</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Recibe una cadena de caracteres y devuelve un archivo json conteniendo las entidades asociadas.</p>
 </div>
 <div class="sect3">
 <h4 id="_parámetros">Parámetros</h4>
@@ -480,17 +480,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tbody>
 </table>
 </div>
+<div class="sect3">
+<h4 id="_ejemplos">Ejemplos</h4>
+<div class="literalblock">
+<div class="title">Búsqueda de entidades a partir de la etiqueta 'Madrid'</div>
+<div class="content">
+<pre>/search/entities.json?label=Madrid</pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_generar_preguntas">Generar preguntas</h3>
-<div class="paragraph">
-<p>Devuelve un archivo json conteniendo las preguntas generadas para la entidad y categoría (<em>plantilla</em>)
-dadas.</p>
-</div>
 <div class="literalblock">
 <div class="content">
 <pre>/generate/questions.json</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Recibe diferentes parámetros y devuelve un archivo json conteniendo las preguntas generadas para
+la entidad y categoría (<em>plantilla</em>)
+selecionadas.</p>
 </div>
 <div class="sect3">
 <h4 id="_parameters">Parameters</h4>
@@ -522,8 +532,24 @@ dadas.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Identificador asociado a la plantilla que se utilizará para generar las preguntas.</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">opcional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Número límite de preguntas a generar.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ninguno, se
+generarán todas las preguntas disponibles en el <em>template</em></p></td>
+</tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="_ejemplos_2">Ejemplos</h4>
+<div class="literalblock">
+<div class="title">Generación de una (1) pregunta sobre la entidad Q312 (Apple Inc.) utilizando el <em>template</em> <a href="#section-anex-templates-companies">[section-anex-templates-companies]</a>.</div>
+<div class="content">
+<pre>/generate/questions.json?entity=Q312&amp;category=Q18608993&amp;limit=1</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -531,7 +557,7 @@ dadas.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-29 12:40:34 +0100
+Last updated 2020-02-23 13:08:42 +0100
 </div>
 </div>
 </body>

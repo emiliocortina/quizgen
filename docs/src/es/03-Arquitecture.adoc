@@ -60,5 +60,5 @@ especificación de dicha API podría significar tener que adaptar este módulo a
 [[section-architecture-data-types]]
 === Tipos de datos
 
-.Diagrama de clases de los diferentes tipos de datos
+.Diagrama de clases de los diferentes tipos de datos del sistema.
 image:types-classes.svg[alt=Data types]

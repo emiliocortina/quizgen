@@ -458,6 +458,101 @@ API y, por último, futuros caminos de mejoras para continuar el proyecto.</p>
 </div>
 </div>
 <div class="sect2">
+<h3 id="section-state-of-the-art">Estado del arte</h3>
+<div class="paragraph">
+<p>Para la realización del proyecto se ha llevado a cabo un proceso de investigación acerca de cómo se ha abordado
+el mismo problema (o similares) en anteriores situaciones.<br>
+A continuación se tratarán varios de los artículos recabados junto con sus ventajas, inconvenientes y similaridades
+con nuestro enfoque.</p>
+</div>
+<div class="sect3">
+<h4 id="_automatic_generation_of_multiple_choice_questions_from_slide_content_using_linked_data">Automatic generation of multiple choice questions from slide content using linked data</h4>
+<div class="paragraph">
+<p>Tiene como objetivo extraer preguntas a partir de información que localiza en diapositivas.<br>
+Es decir, a partir de un texto localiza entidades y posibles enunciados que utiliza para
+la generación de preguntas de múltiple opción.</p>
+</div>
+<div class="paragraph">
+<p>Permite seleccionar diferentes niveles de dificultad, incluyendo preguntas que son difíciles de responder.
+Esto lo consigue utilizando información poco conocida y/o distractores que son semánticamente similares a la
+respuesta correcta.</p>
+</div>
+<div class="paragraph">
+<p>Tiene tres variedades de preguntas:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Gap-fill</em>: se generan a partir de un enunciado en el que una entidad es
+mencionada, sustituyendo la entidad por un espacio en blanco y proporcionando
+otras entidades similares como distractores.</p>
+</li>
+<li>
+<p><em>Choose-the-type</em>: se pregunta por el tipo al que pertenece la entidad.
+Los distractores son similares al tipo de la entidad.</p>
+</li>
+<li>
+<p><em>Jeopardy-style</em>: son preguntas que incluyen algún tipo de pistas sobre
+la respuesta en el enunciado.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Hace uso de DBPedia como fuente de información, y, en cuanto al proceso de verbalizar la información semántica, utiliza un
+enfoque muy similar al que hemos adoptado, basado en plantillas o <em>templates</em>.
+<a href="#slides_2018">[slides_2018]</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_automatic_generation_of_quizzes_from_dbpedia_according_to_educational_standards">Automatic generation of quizzes from DBpedia according to educational standards</h4>
+<div class="paragraph">
+<p>Este artículo busca el desarrollo de un sistema predominantemente enfocado a escuelas.
+Utiliza ontologías específicas de este dominio (Eduprogression y
+Les Incollables Knowledge base).</p>
+</div>
+<div class="paragraph">
+<p>Además, al contrario de nuestro proyecto, que solo utiliza una estrategia de generación de preguntas,
+este emplea 5 estrategias de generación de preguntas para proporcionar 5 tipos de preguntas diferentes.
+<a href="#lyon_2018">[lyon_2018]</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_knowledge_questions_from_knowledge_graphs">Knowledge questions from knowledge graphs</h4>
+<div class="paragraph">
+<p>Utiliza DBPedia como fuente de información.
+Hace distincion entre diferentes tipos de predicados y,
+al igual que <a href="#slides_2018">[slides_2018]</a> y nuestro propio sistema, utiliza un modelo de plantillas
+para verbalizar los enunciados semánticos.</p>
+</div>
+<div class="paragraph">
+<p>Este proyecto también es capaz de evaluar la dificultad de las preguntas.<a href="#kg_2017">[kg_2017]</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_semantic_multiple_choice_question_generation_and_concept_based_assessment">Semantic multiple-choice question generation and concept-based assessment</h4>
+<div class="paragraph">
+<p>Este sistema destaca en el método que utiliza para variar la dificultad de las preguntas.
+Utiliza proximidad entre las entidades en una jerarquía para determinar la dificultad de los
+distractores.<br>
+Por ejemplo, para hacer una pregunta más fácil puede elegir entidades que no aparecen
+en ninguna relación equivalente (seleccionar una película como distractor de una pregunta
+que pregunta por la capital de un país).</p>
+</div>
+<div class="paragraph">
+<p>Requiere una amplia configuración de diferentes parámetros y no permite eligir la entidad
+sobre la que se realizarán las preguntas, tan solo el dominio.<br>
+<em>No sería posible elegir generar preguntas sobre 'Madrid', sino generar preguntas sobre geografía
+en general.</em></p>
+</div>
+<div class="paragraph">
+<p>Además, las preguntas generadas son poco comprensibles en lenguaje natural,
+siendo del tipo: 'Which one of the following response pairs relate in the
+same way as x and y in the relationship p?'
+<a href="#semantic_2015">[semantic_2015]</a></p>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_linked_data">Linked data</h3>
 <div class="paragraph">
 <p>Linked Data son datos estructurados que están interconectados con otros datos.
@@ -506,7 +601,7 @@ Para realizar dichas consultas utilizaremos en lenguaje SPARQL.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-29 12:08:47 +0100
+Last updated 2020-02-23 19:46:56 +0100
 </div>
 </div>
 </body>

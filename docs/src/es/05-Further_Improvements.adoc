@@ -1,7 +1,7 @@
 [[section-future-improvements]]
 == Futuras mejoras
 
-El modelo de _plantillas_ que utiliza el programa tiene algunas limitaciones.
+El modelo de plantillas que utiliza el programa tiene algunas limitaciones.
 
 Requiere que el usuario conozca las diferentes plantillas disponibles (potencialmente podría haber un
 elevado número de ellas).
@@ -29,5 +29,12 @@ propiedades de Wikidata.
 === Dificultad progresiva
 
 El sistema debería tener en cuenta el conocimiento del dominio por parte del usuario, para,
-de esta manera, componer
+de esta manera, adaptar la dificultad de las preguntas de manera progresiva.
+
+Como se ha visto en la sección <<section-state-of-the-art>>, una posible técnica para conseguir esto
+sería utilizar el contexto de la entidad. +
+Es decir, seleccionar los distractores de las
+preguntas basándose en la ubicación de la entidad que representa la respuesta correcta en el grafo,
+eligiendo distractores que
+sean similares a esta para crear preguntas difíciles y viceversa.
 
