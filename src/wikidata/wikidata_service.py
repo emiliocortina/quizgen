@@ -122,14 +122,15 @@ def make_query(query):
     return data['results']['bindings']
 
 
-def search_wd_entities(label):
+def search_wd_entities(label, language):
     """
     Uses Wikidata's API to obtain the entities related to a given label.
     :param label: string used to search similar entities.
     :return: array of results obtained (each result contains id and description).
     """
     r = requests.get(
-        f'https://www.wikidata.org/w/api.php?action=wbsearchentities&search={label}&language=en&format=json')
+        f'https://www.wikidata.org/w/api.php?action=wbsearchentities&search={label}&language={language}'
+        f'&uselang={language}&format=json')
     r = r.json()
     objects = r["search"]
     length = 10 if len(r["search"]) > 10 else len(r["search"])
