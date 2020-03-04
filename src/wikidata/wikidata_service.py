@@ -7,26 +7,26 @@ from src.exceptions.invalid_usage import InvalidUsage
 correct_answer_query = """
     SELECT
       ?entity (SAMPLE(?description) AS ?entityDescription) (SAMPLE(?label) AS  ?entityLabel)
-    WHERE {
+    WHERE {{
       wd:{entity} wdt:{property} ?entity.
       ?entity rdfs:label ?label . 
-      OPTIONAL {?entity schema:description ?description.}
-      FILTER (langMatches( lang(?label), "en" ))
-      FILTER (langMatches( lang(?description), "en" ))
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-    }
+      OPTIONAL {{?entity schema:description ?description.}}
+      FILTER (langMatches( lang(?label), "{language}" ))
+      FILTER (langMatches( lang(?description), "{language}" ))
+      SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{language}". }}
+    }}
     GROUP BY ?entity
 """
 
 distractors_query = """
     SELECT DISTINCT ?entity ?entityLabel ?entityDescription
-    WHERE {
-      ?subject wdt:%s ?entity.
-      FILTER NOT EXISTS {
-        wd:%s wdt:%s ?entity.
-      }
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-    }
+    WHERE {{
+      ?subject wdt:{property} ?entity.
+      FILTER NOT EXISTS {{
+        wd:{entity} wdt:{property} ?entity.
+      }}
+      SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{language}".}}
+    }}
     LIMIT 3
 """
 
@@ -59,33 +59,34 @@ def get_entity_label(entity_id, locale):
     return labels[0]['label']['value']
 
 
-def get_correct_answer(entity_id, property_id, lang):
+def get_correct_answer(entity_id, property_id, lang='en'):
     """
     Obtains the entity that is the object in the statement: entity_id property_id object.
     This entity is the correct answer to the question.
     :param entity_id: subject of the statement.
     :param property_id: predicate of the statement.
+    :param lang: language used to retrieve the information
     :return: object in the statement: entity_id property_id object.
     """
-    query = correct_answer_query.format(entity=entity_id, property=property_id)
+    query = correct_answer_query.format(entity=entity_id, property=property_id, language=lang)
     entities = make_query(query)
     entity = entities[0]
     add_additional_info(entity)
     return entity
 
 
-def get_distractors(entity_id, property_id):
+def get_distractors(entity_id, property_id, lang='en'):
     """
     Obtains distractor entities, that is, entities that appear as objects in statements of the form:
     subject property_id object; where subject!=entity_id (They would be correct answers).
     :param entity_id: Entity we are generating the questions about
         (the subject of the statement for correct answers).
     :param property_id: predicate of the statement.
+    :param lang: language used to retrieve the information
     :return: object in the statement: subject property_id object.
     """
-    entities_query = distractors_query % (property_id, entity_id, property_id)
+    entities_query = distractors_query.format(property=property_id, entity=entity_id, language=lang)
     entities = make_query(entities_query)
-
     for entity in entities:
         add_additional_info(entity)
     return entities
