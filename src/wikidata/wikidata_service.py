@@ -8,7 +8,7 @@ correct_answer_query = """
     SELECT
       ?entity (SAMPLE(?description) AS ?entityDescription) (SAMPLE(?label) AS  ?entityLabel)
     WHERE {
-      wd:%s wdt:%s ?entity.
+      wd:{entity} wdt:{property} ?entity.
       ?entity rdfs:label ?label . 
       OPTIONAL {?entity schema:description ?description.}
       FILTER (langMatches( lang(?label), "en" ))
@@ -59,7 +59,7 @@ def get_entity_label(entity_id, locale):
     return labels[0]['label']['value']
 
 
-def get_correct_answer(entity_id, property_id):
+def get_correct_answer(entity_id, property_id, lang):
     """
     Obtains the entity that is the object in the statement: entity_id property_id object.
     This entity is the correct answer to the question.
@@ -67,7 +67,7 @@ def get_correct_answer(entity_id, property_id):
     :param property_id: predicate of the statement.
     :return: object in the statement: entity_id property_id object.
     """
-    query = correct_answer_query % (entity_id, property_id)
+    query = correct_answer_query.format(entity=entity_id, property=property_id)
     entities = make_query(query)
     entity = entities[0]
     add_additional_info(entity)

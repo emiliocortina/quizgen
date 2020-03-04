@@ -41,7 +41,8 @@ def get_questions():
     if category is None:
         raise InvalidUsage('Please enter an identifier for the category template', status_code=404)
     limit = request.args.get('limit')
-    mcq = generate_questions(entity, questions_category=category, questions_limit=limit)
+    lang = request.args.get('lang')
+    mcq = generate_questions(entity, questions_category=category, questions_limit=limit, language=lang)
     return jsonify(mcq)
 
 
