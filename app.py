@@ -23,7 +23,8 @@ def search_entities_by_label():
     label = request.args.get('label')
     if label is None or len(label.strip()) == 0:
         raise InvalidUsage('Please enter the label.', status_code=404)
-    entities = search_entities(label)
+    lang = request.args.get('lang')
+    entities = search_entities(label, lang)
     return jsonify(entities)
 
 
@@ -40,7 +41,8 @@ def get_questions():
     if category is None:
         raise InvalidUsage('Please enter an identifier for the category template', status_code=404)
     limit = request.args.get('limit')
-    mcq = generate_questions(entity, questions_category=category, questions_limit=limit)
+    lang = request.args.get('lang')
+    mcq = generate_questions(entity, questions_category=category, questions_limit=limit, language=lang)
     return jsonify(mcq)
 
 
