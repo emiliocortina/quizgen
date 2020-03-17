@@ -98,12 +98,17 @@ def add_additional_info(entity):
     :param entity: answer entity with additional information.
     """
     entity_id = entity['entity']['value'].split('/')[-1]
+    additional_info = get_entity_additional_info(entity_id)
+    entity['additionalInfo'] = additional_info
+
+
+def get_entity_additional_info(entity_id):
     query = additional_info_query % (entity_id, entity_id)
     additional_info = make_query(query)
-    if(len(additional_info) > 0):
-        entity['additionalInfo'] = additional_info[0]
+    if (len(additional_info) > 0):
+        return additional_info[0]
     else:
-        entity['additionalInfo'] = {}
+        return {}
 
 
 def make_query(query):
@@ -141,3 +146,4 @@ def search_wd_entities(label, language):
     if len(keys) == 0:
         raise InvalidUsage('No entities found for given label.', status_code=404)
     return keys
+

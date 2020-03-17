@@ -52,14 +52,21 @@ def generate_question(entity_id, property_id, statement, locale):
         correct_answer = get_correct_answer(entity_id, property_id, locale)
         # Obtaining the distractors
         distractors = get_distractors(entity_id, property_id, locale)
+        # Obtaining additional info about the entity
+        additionalInfo = get_entity_additional_info(entity_id);
         # Composing the question object
-        question = {'statement': statement, 'correctAnswer': correct_answer, 'distractors': distractors}
+        question = {'statement': statement, 'correctAnswer': correct_answer, 'distractors': distractors,
+                    'additionalInfo': additionalInfo}
         return question
     except IndexError:
         print('Data not found for given property and entity')
     except ReadTimeout:
         print('Time out')
     return None
+
+
+def get_entity_additional_info(entity_id):
+    return Wikidata.get_entity_additional_info(entity_id)
 
 
 def get_entity_label(entity_id, locale):
