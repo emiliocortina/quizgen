@@ -1,5 +1,10 @@
 # tfg
 
+## Create a virtual environment
+To install dependencies locally instead of globally, in linux/mac run:
+
+    python3 -m venv .venv
+    source .venv/bin/activate
 
 ## Install dependencies
 
@@ -7,6 +12,7 @@
 
 ## Run 
 
+    export FLASK_APP=app
     flask run
 
 ## Links
