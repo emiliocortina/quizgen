@@ -12,8 +12,12 @@ To install dependencies locally instead of globally, in linux/mac run:
 
 ## Run 
 
-    export FLASK_APP=app
+    export FLASK_APP=quizgen
     flask run
+
+## Test
+
+    python -m pytest
 
 ## Links
 

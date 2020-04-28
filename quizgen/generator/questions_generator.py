@@ -1,6 +1,6 @@
-from src.wikidata import wikidata_service as Wikidata
+from quizgen.wikidata import wikidata_service as Wikidata
 from requests.exceptions import ReadTimeout
-from src.categories.categories_manager import get_category_questions
+from quizgen.categories.categories_manager import get_category_questions
 
 
 def generate_questions(entity_id, questions_category, questions_limit=None, language='en'):

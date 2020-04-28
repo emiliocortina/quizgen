@@ -1,4 +1,4 @@
-from src.wikidata import wikidata_service as Wikidata
+from quizgen.wikidata import wikidata_service as Wikidata
 
 
 def get_language(lang):
