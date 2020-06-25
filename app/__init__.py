@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from quizgen.exceptions.invalid_usage import InvalidUsage
-from quizgen.search.entity_search import search_entities
-from quizgen.generator.questions_generator import generate_questions
+from app.exceptions.invalid_usage import InvalidUsage
+from app.search.entity_search import search_entities
+from app.generator.questions_generator import generate_questions
 
 
-def create_app(test_config=None):
+def create_app():
     app = Flask(__name__)
     CORS(app)
 

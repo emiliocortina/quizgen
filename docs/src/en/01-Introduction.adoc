@@ -9,7 +9,8 @@ Wikidata's knowledge graph as the source of information.
 
 === Linked data
 
-Linked Data is structured data which is interlinked with other data. Linked Data can be expressed as semantic triples,
+Linked Data is structured data which is interlinked with other data.
+Linked Data can be expressed as semantic triples,
 or simply triple. As its name indicates, a triple is a set of three entities that codifies a statement about semantic
 data in the form of subject–predicate–object expressions (e.g. "Bob is 35", or "Bob knows John").
 

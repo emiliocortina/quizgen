@@ -2,7 +2,7 @@ import time
 
 import requests
 
-from quizgen.exceptions.invalid_usage import InvalidUsage
+from app.exceptions.invalid_usage import InvalidUsage
 
 correct_answer_query = """
     SELECT

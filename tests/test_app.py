@@ -1,7 +1,7 @@
 import tempfile
 import pytest
 
-from quizgen import create_app
+from app import create_app
 
 
 # This client fixture will be called by each individual test.
@@ -17,5 +17,8 @@ def client():
 
 
 def test_server_works(client):
+    # rv = client.get('/generate/questions.json?entity=Q312&category=Q18608993&limit=1&lang=es')
     rv = client.get('/')
+    print(rv)
+    print(rv.data)
     assert b'Server Works!' in rv.data

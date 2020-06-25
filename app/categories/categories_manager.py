@@ -1,7 +1,7 @@
 import os
 import json
 
-from quizgen.exceptions.invalid_usage import InvalidUsage
+from app.exceptions.invalid_usage import InvalidUsage
 
 
 def get_category_questions(category_id):
