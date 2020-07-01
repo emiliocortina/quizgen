@@ -1,6 +1,12 @@
 # tfg
 
 ## Create a virtual environment
+Command line
+
+Navigate into quizgen folder
+
+    cd quizgen
+
 To install dependencies locally instead of globally, in linux/mac run:
 
     python3 -m venv .venv
@@ -12,7 +18,7 @@ To install dependencies locally instead of globally, in linux/mac run:
 
 ## Run 
 
-    export FLASK_APP=quizgen
+    export FLASK_APP=app
     flask run
 
 ## Test

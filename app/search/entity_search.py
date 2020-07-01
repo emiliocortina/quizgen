@@ -2,7 +2,11 @@ from app.wikidata import wikidata_service as Wikidata
 
 
 def get_language(lang):
-    if lang == 'es':
+    """
+        Checks that the language entered by the user is a supported language.
+        If not valid, it defaults to English.
+    """
+    if lang in ['es', 'pt', 'fr', 'it']:
         return lang
     else:
         return 'en'
