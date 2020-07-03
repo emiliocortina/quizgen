@@ -1,6 +1,7 @@
-from src.wikidata import wikidata_service as Wikidata
+from app import InvalidUsage
+from app.wikidata import wikidata_service as Wikidata
 from requests.exceptions import ReadTimeout
-from src.categories.categories_manager import get_category_questions
+from app.categories.categories_manager import get_category_questions
 
 
 def generate_questions(entity_id, questions_category, questions_limit=None, language='en'):
@@ -18,17 +19,19 @@ def generate_questions(entity_id, questions_category, questions_limit=None, lang
     limit = get_questions_limit(questions_limit)
     locale = get_locale(language)
     for template in templates:
+        if len(questions) >= limit:
+            break
         q = generate_question(entity_id, template, templates[template], locale)
         if q is not None:
             questions.append(q)
-        if len(questions) >= limit:
-            break
     return questions
 
 
 def get_questions_limit(questions_limit):
     try:
         questions_limit = int(questions_limit)
+        if questions_limit < 0:
+            return float("inf")
         return questions_limit
     except:
         return float("inf")
@@ -100,8 +103,13 @@ def get_distractors(entity_id, property_id, locale):
     """
     return Wikidata.get_distractors(entity_id, property_id, locale)
 
+
 def get_locale(lang):
-    if lang == 'es':
+    """
+        Checks that the language entered by the user is a supported language.
+        If not valid, it defaults to English.
+    """
+    if lang in ['es', 'pt', 'fr', 'it']:
         return lang
     else:
         return 'en'

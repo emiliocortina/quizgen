@@ -1,7 +1,7 @@
 import os
 import json
 
-from src.exceptions.invalid_usage import InvalidUsage
+from app.exceptions.invalid_usage import InvalidUsage
 
 
 def get_category_questions(category_id):
@@ -18,7 +18,7 @@ def get_category_questions(category_id):
     with open(data_file) as json_categories:
         available_categories = json.load(json_categories)
         # Check if the requested category doesn't exist in the index
-        if not available_categories[category_id]:
+        if category_id not in available_categories:
             raise InvalidUsage('Please enter a valid category', status_code=404)
         category_file = f'templates/{available_categories[category_id]}'
         category_file = os.path.join(basedir, category_file)
