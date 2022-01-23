@@ -1,4 +1,7 @@
-# tfg
+# Automatic generation of multiple-choice questions using knowledge graphs
+
+## Description
+See attached PDF file [Automatic generation of multiple choice questions using knowledge graphs.pdf](https://github.com/emiliocortina/quizgen/blob/master/Automatic%20generation%20of%20multiple%20choice%20questions%20using%20knowledge%20graphs.pdf)
 
 ## Create a virtual environment
 Command line
